@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 public class RegisterController {
 
-    public void register(String nama, String userName, String pass, String telepon, String alamat, String kelurahan, String kecamatan, String kota, String provinsi, String kodePos) {
+    public String register(String nama, String userName, String pass, String telepon, String alamat, String kelurahan, String kecamatan, String kota, String provinsi, String kodePos) {
         DatabaseHandler conn = new DatabaseHandler();
         conn.connect();
         String query = "INSERT INTO customers(nama,username,pass,telepon,alamat,kelurahan,kecamatan,kota,provinsi,kode_post) VALUES(?,?,?,?,?,?,?,?,?,?)";
@@ -38,16 +38,16 @@ public class RegisterController {
             stmt.setString(9, provinsi);
             stmt.setString(10, kodePos);
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Berhasil melakukan registrasi");
+            return "Berhasil melakukan registrasi";
             
         } catch (SQLException e) {
             if (e.getMessage().contains("'username'")) {
-                JOptionPane.showMessageDialog(null, "Username sudah digunakan");
+                return "Username sudah digunakan";
             } else if (e.getMessage().contains("'telepon'")) {
-                JOptionPane.showMessageDialog(null, "Telepon sudah digunakan");
+                return "Telepon sudah digunakan";
             } else {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Error fatal pusing!");
+                return "Error fatal ini mah!";
             }
         }
     }
