@@ -169,6 +169,8 @@ public class Register {
                     JOptionPane.showMessageDialog(null, "Semua kolom wajib diisi!");
                 }else{
                     JOptionPane.showMessageDialog(null,controller.register(tfNama.getText(),tfUserName.getText(),pass.getText(),tfTelepon.getText(),alamat.getText(),tfKelurahan.getText(),tfKecamatan.getText(),tfKota.getText(),tfProvinsi.getText(),tfKodePos.getText()));
+                    frame.dispose();
+                    new ChooseLogin();
                 }
             }
         });
