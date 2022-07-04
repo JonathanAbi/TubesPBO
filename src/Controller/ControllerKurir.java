@@ -20,30 +20,7 @@ public class ControllerKurir extends javax.swing.JFrame {
     static DatabaseHandler conn = new DatabaseHandler();
     static Kurir kurir = new Kurir();
 
-    public static ArrayList<Kurir> getAllUsers() {
-
-        ArrayList<Kurir> userKurir = new ArrayList<>();
-        conn.connect();
-        String query = "SELECT * FROM kurir";
-        try {
-            Statement stmt = conn.con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-
-            while (rs.next()) {
-                kurir.setName(rs.getString("Nama"));
-                kurir.setTelepon(rs.getString("Telepon"));
-                kurir.setKapasitasBeratBarang(rs.getDouble("Kapasitas Barang"));
-                kurir.setBeratBarangBawaan(rs.getDouble("Berat Barang Bawaan "));
-                userKurir.add(kurir);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return (userKurir);
-    }
-
-    public static void addKurir(String nama, String username, String pass, String telepon, String kapasitas, String totalKapasitas) {
+    public static void addKurir(String nama, String username, String pass, String telepon, String kapasitas, String totalBerat) {
         conn.connect();
         String query = "INSERT INTO kurir(nama, username, pass, telepon, kapasitas_berat_barang, total_berat_barang) VALUES(?,?,?,?,?,?)";
         try {
@@ -65,7 +42,7 @@ public class ControllerKurir extends javax.swing.JFrame {
             stmt.setString(3, pass);
             stmt.setString(4, telepon);
             stmt.setString(5, kapasitas);
-            stmt.setString(6, totalKapasitas);
+            stmt.setString(6, totalBerat);
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Berhasil melakukan penamabahan");
 
@@ -84,9 +61,41 @@ public class ControllerKurir extends javax.swing.JFrame {
     }
 
     public static void hitungKapasitasBarang() {
-        if(kurir.getBeratBarangBawaan() < kurir.getKapasitasBeratBarang()) {
+        if (kurir.getBeratBarangBawaan() < kurir.getKapasitasBeratBarang()) {
             JOptionPane.showMessageDialog(null, "Barang sudah melebihi kapasitas");
         }
     }
 
+    public static void updateKurir(String id, String nama, String username, String pass, String telepon, String kapasitas, String totalBerat) {
+        conn.connect();
+        String query = "UPDATE kurir SET nama='" + nama + "', "
+                + "username='" + username + "', "
+                + "pass='" + pass + "' "
+                + "telepon='" + telepon + "' "
+                + "kapasitas_berat_barang='" + kapasitas + "' "
+                + "total_berat_barang='" + totalBerat + "' "
+                + "WHERE kurir_id='" + id + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            stmt.executeUpdate(query);
+            JOptionPane.showMessageDialog(null, "Berhasil melakukan update");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Gagal melakukan update");
+        }
+    }
+
+    public static void deleteKurir(String name) {
+        conn.connect();
+
+        String query = "DELETE FROM kurir WHERE nama='" + name + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            stmt.executeUpdate(query);
+            JOptionPane.showMessageDialog(null, "Berhasil menghapus data");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Gagal menghapus data");
+        }
+    }
 }
