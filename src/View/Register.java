@@ -23,7 +23,7 @@ public class Register {
         //label judul
         JLabel judul = new JLabel("Register");
         judul.setBounds(225, 5, 500, 60);
-        judul.setFont(font1);
+        judul.setFont(new Font("Serif", Font.BOLD, 35));
 
         //label nama
         JLabel namaLabel = new JLabel("Nama");
@@ -168,7 +168,9 @@ public class Register {
                 if(tfNama.getText().isEmpty()||tfUserName.getText().isEmpty()||pass.getPassword().equals("")||tfTelepon.getText().isEmpty()||alamat.getText().isEmpty()||tfKelurahan.getText().isEmpty()||tfKecamatan.getText().isEmpty()||tfKota.getText().isEmpty()||tfProvinsi.getText().isEmpty()||tfKodePos.getText().isEmpty()){
                     JOptionPane.showMessageDialog(null, "Semua kolom wajib diisi!");
                 }else{
-                    controller.register(tfNama.getText(),tfUserName.getText(),pass.getText(),tfTelepon.getText(),alamat.getText(),tfKelurahan.getText(),tfKecamatan.getText(),tfKota.getText(),tfProvinsi.getText(),tfKodePos.getText());
+                    JOptionPane.showMessageDialog(null,controller.register(tfNama.getText(),tfUserName.getText(),pass.getText(),tfTelepon.getText(),alamat.getText(),tfKelurahan.getText(),tfKecamatan.getText(),tfKota.getText(),tfProvinsi.getText(),tfKodePos.getText()));
+                    frame.dispose();
+                    new ChooseLogin();
                 }
             }
         });
