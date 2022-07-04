@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Controller;
 
 import KoneksiDatabase.DatabaseHandler;
@@ -5,18 +10,15 @@ import Model.Kurir;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author kevin
  */
-public class ControllerKurir extends javax.swing.JFrame {
-
+public class ControllerKurir {
     static DatabaseHandler conn = new DatabaseHandler();
     static Kurir kurir = new Kurir();
 
