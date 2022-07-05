@@ -21,10 +21,6 @@ public class Etalase {
         new Etalase();
     }
     
-//    public ArrayList<Produk> getProduk(){
-//        
-//    }
-    
     public JPanel getPanelBarang(ArrayList <Produk> listProduk, int iterasi, ArrayList <Produk> keranjang){
         //panel utama
         JPanel panel = new JPanel();
@@ -37,16 +33,29 @@ public class Etalase {
             Produk produk = listProduk.get(iterasi+i);
             JPanel panelBarang = new JPanel();
             panelBarang.setSize(250,300);
+            panelBarang.setBackground(Color.WHITE);
             panelBarang.setLayout(null);
             
             String txt = produk.getNama() + " - " + produk.getWarna();
             JLabel lblNamaProduk = new JLabel(txt);
-            lblNamaProduk.setBounds(10,100,230,50);
-            lblNamaProduk.setFont(new Font("Serif", Font.PLAIN, 20));
+            lblNamaProduk.setBounds(10,215,200,25);
+            lblNamaProduk.setFont(new Font("Serif", Font.PLAIN, 22));
             
-            JButton btn = new JButton("Add to Cart");
+            JLabel lblHarga = new JLabel("Rp. " + String.valueOf(produk.getHarga()));
+            lblHarga.setBounds(10,240,200,20);
+            lblHarga.setFont(new Font("Serif", Font.PLAIN, 17));
+            
+            int[] stok = produk.getStock();
+            txt = "| S : " + stok[0] +" | M : " + stok[1] +" | L : " + stok[2] +" | XL : " + stok[3] +" |";
+            JLabel lblStock = new JLabel(txt);
+            lblStock.setBounds(10,260,200,15);
+            lblStock.setFont(new Font("Serif", Font.PLAIN, 15));
+            
+            JButton btn = new JButton("+");
             btn.setFont(new Font("Serif", Font.PLAIN, 10));
-            btn.setBounds(150,225,75,50);
+            btn.setBounds(190,225,50,50);
+            
+            
                       
             btn.addActionListener(new ActionListener() {
                 @Override
@@ -55,6 +64,8 @@ public class Etalase {
                 }
             });
             panelBarang.add(lblNamaProduk);
+            panelBarang.add(lblHarga);
+            panelBarang.add(lblStock);
             panelBarang.add(btn);
             panel.add(panelBarang);
         }
@@ -87,10 +98,10 @@ public class Etalase {
         buttonKeranjang.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (int i = 0; i < keranjang.size(); i++) {
-                    Produk temp = keranjang.get(i);
-                    System.out.println(temp.getNama() + " - " + temp.getWarna());
-                }
+//                for (int i = 0; i < keranjang.size(); i++) {
+//                    Produk temp = keranjang.get(i);
+//                    System.out.println(temp.getNama() + " - " + temp.getWarna());
+//                }
             }
             
         });
@@ -104,8 +115,6 @@ public class Etalase {
         
         //panel barang
         panelListBarang = getPanelBarang(listProduk,iterasi,keranjang);
-//        panelListBarang.setPreferredSize(new Dimension(600, 600));
-//        panelListBarang.setLayout(new GridLayout(2,2));
         
         
         //button next
@@ -114,15 +123,17 @@ public class Etalase {
         next.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                iterasi += 4;
-                if(iterasi >= listProduk.size()){
+                if(listProduk.size()-(iterasi+4) <= 4){
                     iterasi = listProduk.size() - 4;
+                }else{
+                    iterasi += 4;
                 }
                 frame.remove(panelListBarang);
                 panelListBarang = getPanelBarang(listProduk,iterasi,keranjang);
                 frame.add(panelListBarang,BorderLayout.CENTER);
-                frame.setVisible(false);
-                frame.setVisible(true);
+                frame.invalidate();
+                frame.validate();
+                frame.repaint();
             }
         });
         
@@ -132,15 +143,17 @@ public class Etalase {
         prev.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                iterasi -= 4;
-                if(iterasi < 0){
+                if(iterasi-4 < 0){
                     iterasi = 0;
+                }else{
+                    iterasi -= 4;
                 }
                 frame.remove(panelListBarang);
                 panelListBarang = getPanelBarang(listProduk,iterasi,keranjang);
                 frame.add(panelListBarang,BorderLayout.CENTER);
-                frame.setVisible(false);
-                frame.setVisible(true);
+                frame.invalidate();
+                frame.validate();
+                frame.repaint();
             }
         });
         
