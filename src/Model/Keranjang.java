@@ -18,4 +18,11 @@ public class Keranjang {
         this.listBarang = listBarang;
     }
     
+    public void addBarang(Produk produk){
+        this.listBarang.add(produk);
+    }
+    
+    public void hapusBarang(Produk produk){
+        this.listBarang.remove(produk);
+    }
 }

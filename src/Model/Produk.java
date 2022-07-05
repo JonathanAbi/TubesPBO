@@ -1,7 +1,8 @@
 
 package Model;
 
-public class Produk extends Thing{
+public class Produk{
+    private int id;
     private String nama;
     private String berat;
     private String warna;
@@ -9,14 +10,22 @@ public class Produk extends Thing{
     private Double harga;
 
     public Produk(String nama, String berat, String warna, int[] stock, Double harga, int id) {
-        super(id);
+        this.id = id;
         this.nama = nama;
         this.berat = berat;
         this.warna = warna;
         this.stock = stock;
         this.harga = harga;
     }
+    
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getNama() {
         return nama;
     }

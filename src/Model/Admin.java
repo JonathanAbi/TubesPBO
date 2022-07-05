@@ -1,7 +1,7 @@
 
 package Model;
 
-public class Admin extends Person implements UserInterface{
+public class Admin extends User implements UserInterface{
 
     public Admin(String name, String username, String password, int id) {
         super(name, username, password, id);

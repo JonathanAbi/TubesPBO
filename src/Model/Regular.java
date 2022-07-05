@@ -1,7 +1,7 @@
 
 package Model;
 
-public abstract class Regular extends Person{
+public abstract class Regular extends User{
     protected String telepon;
 
     public Regular(String telepon, String name, String username, String password, int id) {

@@ -7,9 +7,9 @@ public class Alamat {
     private String kecamatan;
     private String kota;
     private String provinsi;
-    private int kodePos;
+    private String kodePos;
 
-    public Alamat(String alamatLengkap, String kelurahan, String kecamatan, String kota, String provinsi, int kodePos) {
+    public Alamat(String alamatLengkap, String kelurahan, String kecamatan, String kota, String provinsi, String kodePos) {
         this.alamatLengkap = alamatLengkap;
         this.kelurahan = kelurahan;
         this.kecamatan = kecamatan;
@@ -58,11 +58,11 @@ public class Alamat {
         this.provinsi = provinsi;
     }
 
-    public int getKodePos() {
+    public String getKodePos() {
         return kodePos;
     }
 
-    public void setKodePos(int kodePos) {
+    public void setKodePos(String kodePos) {
         this.kodePos = kodePos;
     }
     

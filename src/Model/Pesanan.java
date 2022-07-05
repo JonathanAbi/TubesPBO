@@ -1,7 +1,8 @@
 
 package Model;
 
-public class Pesanan extends Thing{
+public class Pesanan{
+    private int id;
     private int paketId;
     private int customerId;
     private int kurirId;
@@ -16,7 +17,7 @@ public class Pesanan extends Thing{
     private PengirimanEnum statusPengiriman;
 
     public Pesanan(int paketId, int customerId, int kurirId, int barangId, int jumlah, UkuranEnum ukuran, String warna, Double hargaTotal, Double biayaPengiriman, PembayaranEnum jenisPembayaran, boolean statusPembayaran, PengirimanEnum statusPengiriman, int id) {
-        super(id);
+        this.id = id;
         this.paketId = paketId;
         this.customerId = customerId;
         this.kurirId = kurirId;
@@ -30,7 +31,15 @@ public class Pesanan extends Thing{
         this.statusPembayaran = statusPembayaran;
         this.statusPengiriman = statusPengiriman;
     }
+    
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public int getPaketId() {
         return paketId;
     }
