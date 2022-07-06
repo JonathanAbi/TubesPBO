@@ -12,19 +12,8 @@ public class LoginController {
     public String LoginController(String tipe, String userName, String pass) {
         DatabaseHandler conn = new DatabaseHandler();
         conn.connect();
-
-        try {
-            MessageDigest m = MessageDigest.getInstance("MD5");
-            m.update(pass.getBytes());
-            byte[] bytes = m.digest();
-            StringBuilder s = new StringBuilder();
-            for (int i = 0; i < bytes.length; i++) {
-                s.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-            }
-            pass = s.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
+        
+        pass = Hasher.password(pass);
         try {
             java.sql.Statement stat = conn.con.createStatement();
             ResultSet result=stat.executeQuery("select * from "+tipe+" where username='"+userName+"'");
