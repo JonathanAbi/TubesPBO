@@ -55,7 +55,7 @@ public class Login {
                     frame.dispose();
                     JOptionPane.showMessageDialog(null,result);
                     //masukin tujuan dibawah
-                    
+                    new Profile();
                 }else if(result.equals("Password Salah!")){
                     JOptionPane.showMessageDialog(null,result);
                     pass.setText("");
