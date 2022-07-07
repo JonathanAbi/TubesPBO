@@ -9,71 +9,143 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import View.Etalase;
 
 public class EtalaseController {
     
-    public ArrayList <Produk> getProduk(){
-        ArrayList <Produk> listProduk = new ArrayList<>();
-        Produk produk;
-        DatabaseHandler conn = new DatabaseHandler();
-        conn.connect();
-        try{
-            java.sql.Statement stat = conn.con.createStatement();
-            ResultSet result = stat.executeQuery("select * from barang");
-            while(result.next()){
-                int id = result.getInt("barang_id");
-                String nama = result.getString("nama");
-                String berat = String.valueOf(result.getDouble("berat"));
-                String warna = result.getString("warna");
-                int[] stock = new int[4];
-                stock[0] = result.getInt("stok_ukuran_S");
-                stock[1] = result.getInt("stok_ukuran_M");
-                stock[2] = result.getInt("stok_ukuran_L");
-                stock[3] = result.getInt("stok_ukuran_XL");
-                Double harga = result.getDouble("harga");
-                produk = new Produk(nama, berat, warna, stock, harga, id);
-                listProduk.add(produk);
-            }
-        }
-        catch (SQLException e){
-            
-        }
+    JPanel panelListBarang;
+    JFrame frame;
+    int iterasi = 0;
+    UkuranEnum ukuran;
+    JPanel panel;
+    JSpinner[] jumlah = new JSpinner[4];
+    int[][] stok = new int[4][4];
+    int[] tempIndex = new int[4];
+    
+    public static void main(String[] args) {
+        new Etalase();
+    }
         
-        
-        return listProduk;
+    public void refreshFrame(){
+        frame.invalidate();
+        frame.validate();
+        frame.repaint();
     }
     
-    
-    public JPanel getPanelBarang(int iterasi){
-        ArrayList <Produk> listProduk = getProduk();
+    public JPanel getPanel(int iterasi){
         //panel utama
-        JPanel panel = new JPanel();
+        EtalasePanelBarangController[] controller = new EtalasePanelBarangController[4];
+        panel = new JPanel();
+        panel.setPreferredSize(new Dimension(600, 600));
         panel.setLayout(new GridLayout(2,2));
         for (int i = 0; i < 4; i++) {
-            if(iterasi+i > listProduk.size()){
-                break;
-            }
-            Produk produk = listProduk.get(iterasi+i);
-            JPanel panelBarang = new JPanel();
-            panel.setSize(250,300);
-            panel.setLayout(null);
-            
-            String txt = produk.getNama() + " - " + produk.getWarna();
-            JLabel lblNamaProduk = new JLabel(txt);
-            lblNamaProduk.setBounds(10,100,230,50);
-            lblNamaProduk.setFont(new Font("Serif", Font.PLAIN, 20));
-            
-            JButton btn = new JButton("Add to Cart");
-            btn.setFont(new Font("Serif", Font.PLAIN, 10));
-            btn.setBounds(150,225,75,50);
-            
-            btn.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent ae) {
-                }
-            });
+            controller[i] = new EtalasePanelBarangController();
+            JPanel temp = controller[i].getPanelBarang(iterasi + i);
+            panel.add(temp);
         }
-        
         return panel;
+    }
+    
+    public JFrame getFrame(){
+        EtalasePanelBarangController controller = new EtalasePanelBarangController();
+        controller.getProduk();
+        Font fontButton = new Font("Serif", Font.PLAIN, 10);
+        frame = new JFrame("Etalase");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(600, 700);
+        
+        //panel judul
+        JPanel panelJudul = new JPanel();
+        panelJudul.setPreferredSize(new Dimension(600, 100));
+        panelJudul.setBackground(Color.PINK);
+        panelJudul.setLayout(null);
+        
+        //label judul
+        JLabel judul = new JLabel("Etalase");
+        judul.setBounds(225, 10, 200, 100);
+        judul.setFont(new Font("Serif", Font.BOLD, 35));
+        
+        //button keranjang
+        JButton buttonKeranjang = new JButton("Keranjang");
+        buttonKeranjang.setFont(fontButton);
+        buttonKeranjang.setBounds(500, 10, 75, 50);
+        buttonKeranjang.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        buttonKeranjang.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SingletonKeranjang keranjang = SingletonKeranjang.getInstance();
+                for (int i = 0; i < keranjang.getLength(); i++) {
+                    Produk temp = keranjang.getProduk(i);
+                    String tempTXT = "";
+                    switch (keranjang.getUkuran(i)) {
+                        case S:
+                            tempTXT = "S";
+                            break;
+                        case M:
+                            tempTXT = "M";
+                            break;
+                        case L:
+                            tempTXT = "L";
+                            break;
+                        default:
+                            tempTXT = "XL";
+                            break;
+                    }
+                    System.out.println(temp.getNama() + " - " + temp.getWarna() + "(" + tempTXT + ") - " + keranjang.getJumlah(i));
+                }
+            }
+        });
+        
+        //pengisian panel judul
+        panelJudul.add(judul);
+        panelJudul.add(buttonKeranjang);
+                
+        //panel barang
+        panelListBarang = getPanel(iterasi);
+        
+        //button next
+        JButton next = new JButton(">");
+        next.setSize(100, 600);
+        next.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArrayList<Produk> p = SingletonProduk.getInstance().getListProduk();
+                if(p.size()-(iterasi+4) <= 4){
+                    iterasi = p.size() - 4;
+                }else{
+                    iterasi += 4;
+                }
+                frame.remove(panelListBarang);
+                panelListBarang = getPanel(iterasi);
+                frame.add(panelListBarang,BorderLayout.CENTER);
+                refreshFrame();
+            }
+        });
+        
+        //button prev
+        JButton prev = new JButton("<");
+        prev.setSize(100, 600);
+        prev.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(iterasi-4 < 0){
+                    iterasi = 0;
+                }else{
+                    iterasi -= 4;
+                }
+                frame.remove(panelListBarang);
+                panelListBarang = getPanel(iterasi);
+                frame.add(panelListBarang,BorderLayout.CENTER);
+                refreshFrame();
+            }
+        });
+        
+        //pengisian frame
+        frame.add(panelJudul,BorderLayout.NORTH);
+        frame.add(panelListBarang,BorderLayout.CENTER);
+        frame.add(next,BorderLayout.EAST);
+        frame.add(prev,BorderLayout.WEST);
+        frame.setVisible(true);
+        return frame;
     }
 }
