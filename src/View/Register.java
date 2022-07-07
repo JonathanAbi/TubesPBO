@@ -18,7 +18,7 @@ public class Register {
         frame.setSize(600, 700);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Font font1=new Font("Serif", Font.PLAIN, 20);
+        Font font1 = new Font("Serif", Font.PLAIN, 20);
 
         //label judul
         JLabel judul = new JLabel("Register");
@@ -135,7 +135,7 @@ public class Register {
         back.setBounds(100, 510, 180, 50);
         back.setFont(font1);
         back.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        
+
         frame.add(judul);
         frame.add(namaLabel);
         frame.add(tfNama);
@@ -165,12 +165,21 @@ public class Register {
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                if(tfNama.getText().isEmpty()||tfUserName.getText().isEmpty()||pass.getPassword().equals("")||tfTelepon.getText().isEmpty()||alamat.getText().isEmpty()||tfKelurahan.getText().isEmpty()||tfKecamatan.getText().isEmpty()||tfKota.getText().isEmpty()||tfProvinsi.getText().isEmpty()||tfKodePos.getText().isEmpty()){
+                if (tfNama.getText().isEmpty() || tfUserName.getText().isEmpty() || pass.getPassword().equals("") || tfTelepon.getText().isEmpty() || alamat.getText().isEmpty() || tfKelurahan.getText().isEmpty() || tfKecamatan.getText().isEmpty() || tfKota.getText().isEmpty() || tfProvinsi.getText().isEmpty() || tfKodePos.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Semua kolom wajib diisi!");
-                }else{
-                    JOptionPane.showMessageDialog(null,controller.register(tfNama.getText(),tfUserName.getText(),pass.getText(),tfTelepon.getText(),alamat.getText(),tfKelurahan.getText(),tfKecamatan.getText(),tfKota.getText(),tfProvinsi.getText(),tfKodePos.getText()));
-                    frame.dispose();
-                    new ChooseLogin();
+                } else {
+                    String kondisi = controller.register(tfNama.getText(), tfUserName.getText(), pass.getText(), tfTelepon.getText(), alamat.getText(), tfKelurahan.getText(), tfKecamatan.getText(), tfKota.getText(), tfProvinsi.getText(), tfKodePos.getText());
+                    JOptionPane.showMessageDialog(null, kondisi);
+                    if (kondisi.equals("Berhasil melakukan registrasi")) {
+                        frame.dispose();
+                        new ChooseLogin();
+                    } else if (kondisi.equals("Username sudah digunakan")) {
+                        tfUserName.setText("");
+                        tfUserName.requestFocus();
+                    } else {
+                        tfTelepon.setText("");
+                        tfTelepon.requestFocus();
+                    }
                 }
             }
         });
