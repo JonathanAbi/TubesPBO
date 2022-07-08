@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.*;
-import java.util.ArrayList;
 import Database.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,12 +19,11 @@ public class EtalasePanelBarangController {
     String pointerDB = "";
     
     public void updateDatabase(String pointer, int id, int stokBaru){
-        System.out.println("Masuk update database");
         DatabaseHandler conn = new DatabaseHandler();
         conn.connect();
         try{
             PreparedStatement stat = conn.con.prepareStatement("UPDATE barang SET " + pointer + " =  ? WHERE barang_id = ?");
-            stat.setInt(1, stokBaru);
+            stat.setInt(1,stokBaru);
             stat.setInt(2,id);
             stat.executeUpdate();
             getProduk();
