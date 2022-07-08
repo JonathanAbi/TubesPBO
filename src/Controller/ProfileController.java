@@ -2,6 +2,7 @@ package Controller;
 
 import Database.DatabaseHandler;
 import Model.Alamat;
+import Model.AlamatEnum;
 import Model.Customer;
 import Model.SingletonProfile;
 import java.sql.PreparedStatement;
@@ -18,7 +19,7 @@ public class ProfileController {
     public int cariIndexAlamat() {
         for (int i = 0; i < customer.getAlamat().size(); i++) {
             Alamat temp = customer.getAlamat().get(i);
-            if (temp.getStatus() == 0) {
+            if (temp.getStatus() == AlamatEnum.PERMANENT) {
                 index = i;
                 break;
             }
