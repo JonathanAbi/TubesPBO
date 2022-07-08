@@ -167,6 +167,8 @@ public class EtalasePanelBarangController {
                     JOptionPane.showMessageDialog(null, "Mohon pilih ukuran terlebih dahulu");
                 }else if(stok[in] == 0){
                     JOptionPane.showMessageDialog(null, "Maaf untuk ukuran tersebut stok habis");
+                }else if(jmlhBeli == 0){
+                    JOptionPane.showMessageDialog(null, "Jumlah beli harus lebih dari 0!!");
                 }else if(jmlhBeli > stok[in]){
                     JOptionPane.showMessageDialog(null, "Maaf untuk ukuran tersebut stok tersisa " + stok[in]);
                 } else {
