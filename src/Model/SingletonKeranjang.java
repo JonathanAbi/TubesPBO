@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class SingletonKeranjang {
     private static SingletonKeranjang instance;
-    private ArrayList <Produk> produk = new ArrayList<>();
+    private ArrayList <Produk> listProduk = new ArrayList<>();
     private ArrayList <UkuranEnum> ukuran = new ArrayList<>();
     private ArrayList <Integer> jumlah = new ArrayList<>();
     int length = 0;
@@ -22,7 +22,7 @@ public class SingletonKeranjang {
     }
     
     public void reset(){
-        this.produk = new ArrayList<>();
+        this.listProduk = new ArrayList<>();
         this.ukuran = new ArrayList<>();
         this.jumlah = new ArrayList<>();
     }
@@ -36,12 +36,12 @@ public class SingletonKeranjang {
     }
     
     public Produk getProduk(int index) {
-        return produk.get(index);
+        return listProduk.get(index);
     }
     
     public void addBarang(Produk p){
         addLength();
-        this.produk.add(p);
+        this.listProduk.add(p);
     }
     
     public UkuranEnum getUkuran(int index) {
@@ -60,4 +60,10 @@ public class SingletonKeranjang {
         this.jumlah.add(jumlah);
     }
     
+    public void hapusBarang(int index){
+        this.jumlah.remove(index);
+        this.ukuran.remove(index);
+        this.listProduk.remove(index);
+        this.length--;
+    }
 }
