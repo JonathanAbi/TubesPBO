@@ -5,6 +5,7 @@
  */
 package View;
 import Controller.UpdateBarangController;
+import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,9 +26,11 @@ public class UpdateBarang {
         
         //title of the menu
         JLabel judul = new JLabel("Menu Update Barang");
-        judul.setHorizontalAlignment(JLabel.CENTER);
         judul.setFont(fontTitle);
+        judul.setBounds(125, 5, 500, 100);
         frame.add(judul);
+        
+        frame.setLayout(null);
         frame.setVisible(true);
     }
 }
