@@ -13,6 +13,18 @@ public class SingletonKeranjang {
     private SingletonKeranjang(){
         
     }
+
+    public ArrayList<Produk> getListProduk() {
+        return listProduk;
+    }
+
+    public ArrayList<UkuranEnum> getUkuran() {
+        return ukuran;
+    }
+
+    public ArrayList<Integer> getJumlah() {
+        return jumlah;
+    }
     
     public static SingletonKeranjang getInstance(){
         if(instance == null){
@@ -31,11 +43,15 @@ public class SingletonKeranjang {
         this.length++;
     }
     
+    public void removeLength(){
+        this.length--;
+    }
+    
     public int getLength(){
         return length;
     }
     
-    public Produk getProduk(int index) {
+    public Produk getProdukAt(int index) {
         return listProduk.get(index);
     }
     
@@ -44,7 +60,7 @@ public class SingletonKeranjang {
         this.listProduk.add(p);
     }
     
-    public UkuranEnum getUkuran(int index) {
+    public UkuranEnum getUkuranAt(int index) {
         return ukuran.get(index);
     }
 
@@ -52,7 +68,7 @@ public class SingletonKeranjang {
         this.ukuran.add(ukuran);
     }
 
-    public int getJumlah(int index) {
+    public int getJumlahAt(int index) {
         return jumlah.get(index);
     }
     
