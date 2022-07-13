@@ -161,6 +161,7 @@ public class TambahProduk extends JFrame implements ActionListener, KeyListener 
                 jumlahM = Integer.parseInt(m.getText());
                 jumlahL = Integer.parseInt(l.getText());
                 jumlahXL = Integer.parseInt(xl.getText());
+                int[] stok = {jumlahS, jumlahM, jumlahL, jumlahXL};
             }
         }
     }
