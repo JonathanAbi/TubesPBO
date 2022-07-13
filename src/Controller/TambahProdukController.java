@@ -6,7 +6,6 @@
 package Controller;
 
 import Database.DatabaseHandler;
-import Model.SingletonProduk;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -16,12 +15,7 @@ import java.sql.SQLException;
  */
 public class TambahProdukController {
 
-    SingletonProduk produk = SingletonProduk.getInstance();
     DatabaseHandler c = new DatabaseHandler();
-
-    public static void main(String[] args) {
-
-    }
 
     public String tambahProdukBaru(String nama, Double berat, String warna, int jumlahS, int jumlahM, int jumlahL, int jumlahXL, Double harga) {
         String query = "INSERT INTO barang(nama, berat, harga, warna, stok_ukuran_S, stok_ukuran_M, stok_ukuran_L, stok_ukuran_XL) VALUE (?,?,?,?,?,?,?,?)";
@@ -37,8 +31,12 @@ public class TambahProdukController {
             stmt.setInt(7, jumlahL);
             stmt.setInt(8, jumlahXL);
             stmt.execute();
+            c.disconnect();
+            SingletonProdukContorller produkList = new SingletonProdukContorller();
+            produkList.getProdukFromDB();
             return "Berhasil tamabah produk!";
         } catch (SQLException e) {
+            c.disconnect();
             return "gagal tambah produk!";
         }
     }
