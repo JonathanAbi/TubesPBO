@@ -34,7 +34,6 @@ public class UpdateHarga extends JFrame implements ActionListener, KeyListener, 
     JComboBox produkCb;
     JTextField hargaAwalTf, hargaAkhirTf;
     JButton update;
-    JFormattedTextField hargaAkhirIn;
     Double hargaAkhir;
     UpdateHargaController harga = new UpdateHargaController();
     String[] nameList;
@@ -104,7 +103,7 @@ public class UpdateHarga extends JFrame implements ActionListener, KeyListener, 
         update.setBounds(15, 126, 200, 50);
         update.setFont(regularF);
         inputArea.add(update);
-        
+
         exit = new JLabel("<<Kembali ke update menu");
         exit.setBounds(15, 185, 170, 18);
         inputArea.add(exit);
@@ -113,7 +112,7 @@ public class UpdateHarga extends JFrame implements ActionListener, KeyListener, 
         update.addActionListener(this);
 
         hargaAkhirTf.addKeyListener(this);
-        
+
         exit.addMouseListener(this);
 
         inputArea.setLayout(null);
@@ -168,29 +167,31 @@ public class UpdateHarga extends JFrame implements ActionListener, KeyListener, 
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {}
+    public void mouseClicked(MouseEvent e) {
+    }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (e.getSource()==exit) {
+        if (e.getSource() == exit) {
             frame.dispose();
             new UpdateBarangMenu();
         }
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {
+    }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        if (e.getSource()==exit) {
+        if (e.getSource() == exit) {
             exit.setForeground(Color.red);
         }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        if (e.getSource()==exit) {
+        if (e.getSource() == exit) {
             exit.setForeground(Color.black);
         }
     }
