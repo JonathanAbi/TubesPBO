@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author glenn
  */
-public class UpdateStokController {
+public class UpdateHargaController {
     SingletonProdukController produkCt = new SingletonProdukController();
     SingletonProduk produkS = SingletonProduk.getInstance();
     
@@ -28,5 +28,8 @@ public class UpdateStokController {
             nameList[i] = produkList.get(i).getNama();
         }
         return nameList;
+    }
+    public Produk getProdukByIndex(int i) {
+        return getProdukList().get(i);
     }
 }

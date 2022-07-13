@@ -55,9 +55,9 @@ public class UpdateBarangMenu extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==uStok) {
-            new UpdateStok();
-        } else if(e.getSource()==uHarga) {
             new UpdateHarga();
+        } else if(e.getSource()==uHarga) {
+            new UpdateStock();
         } else if(e.getSource()==uTambahProduk) {
             new TambahProduk();
         }
