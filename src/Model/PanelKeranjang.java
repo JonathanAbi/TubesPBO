@@ -43,13 +43,13 @@ public class PanelKeranjang extends JPanel {
         JLabel harga = new JLabel(String.valueOf(hargaTotal), SwingConstants.LEFT);
         harga.setFont(fontNamaProduk);
 
-        //checkbox delete
-        JCheckBox jbDelete = new JCheckBox("Pilih item");
-        jbDelete.setFont(fontHarga);
-        jbDelete.addItemListener(new ItemListener() {
+        //checkbox
+        JCheckBox cbChoose = new JCheckBox("Pilih item");
+        cbChoose.setFont(fontHarga);
+        cbChoose.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                if (jbDelete.isSelected()) {
+                if (cbChoose.isSelected()) {
                     chosen = true;
                 } else {
                     chosen = false;
@@ -68,6 +68,6 @@ public class PanelKeranjang extends JPanel {
         setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
         setSize(600, 150);
         add(panel);
-        add(jbDelete);
+        add(cbChoose);
     }
 }

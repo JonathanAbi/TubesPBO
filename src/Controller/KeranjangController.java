@@ -4,14 +4,9 @@ import Model.*;
 import Database.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import javax.swing.*;
-import javax.swing.JSpinner.DefaultEditor;
-import javax.swing.border.MatteBorder;
 
 public class KeranjangController {
 
@@ -47,8 +42,6 @@ public class KeranjangController {
                 PreparedStatement stat = conn.con.prepareStatement("UPDATE barang SET " + pointer + " =  ? WHERE barang_id = ?");
                 stat.setInt(1,listProduk.get(i).getStock()[in]);
                 stat.setInt(2,listProduk.get(i).getId());
-//                stat.setInt(1,SingletonKeranjang.getInstance().getJumlahAt(index));
-//                stat.setInt(2,SingletonKeranjang.getInstance().getProdukAt(index).getId());
                 stat.executeUpdate();
                 EtalasePanelBarangController c = new EtalasePanelBarangController();
                 c.getProduk();

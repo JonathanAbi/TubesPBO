@@ -15,16 +15,29 @@ import javax.swing.*;
 public class KeranjangScreen {
 
     PanelKeranjang[] keranjang;
-    
-    public boolean update(ArrayList <Produk> listProduk, ArrayList <UkuranEnum> listUkuran, ArrayList <Integer> listJumlah) {
-        KeranjangController c = new KeranjangController();
-        return c.updateDatabase(listProduk,listUkuran,listJumlah);
+    ArrayList<Produk> listProduk = new ArrayList<>();
+    ArrayList<UkuranEnum> listUkuran = new ArrayList<>();
+    ArrayList<Integer> listJumlah = new ArrayList<>();
+
+    public void getChosen() {
+        for (int i = 0; i < SingletonKeranjang.getInstance().getLength(); i++) {
+            if (keranjang[i].chosen) {
+                listProduk.add(keranjang[i].produk);
+                listUkuran.add(keranjang[i].ukuran);
+                listJumlah.add(keranjang[i].jumlah);
+            }
+        }
     }
-    
+
+    public boolean update(ArrayList<Produk> listProduk, ArrayList<UkuranEnum> listUkuran, ArrayList<Integer> listJumlah) {
+        KeranjangController c = new KeranjangController();
+        return c.updateDatabase(listProduk, listUkuran, listJumlah);
+    }
+
     public static void main(String[] args) {
         new Etalase();
     }
-    
+
     public KeranjangScreen() {
         //font
         Font fontButton = new Font("Serif", Font.PLAIN, 14);
@@ -39,46 +52,47 @@ public class KeranjangScreen {
         JButton back = new JButton("back");
         back.setBounds(0, 0, 100, 50);
         back.setFont(fontButton);
-        back.addActionListener(new ActionListener(){
+        back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
                 new Etalase();
             }
         });
-        
+
         //Button delete
         JButton delete = new JButton("Delete");
         delete.setBounds(380, 0, 100, 50);
         delete.setFont(fontButton);
-        delete.addActionListener(new ActionListener(){
+        delete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ArrayList <Produk> listProduk = new ArrayList<>();
-                ArrayList <UkuranEnum> listUkuran = new ArrayList<>();
-                ArrayList <Integer> listJumlah = new ArrayList<>();
-                for (int i = 0; i < SingletonKeranjang.getInstance().getLength(); i++) {
-                    if(keranjang[i].chosen){
-                        listProduk.add(keranjang[i].produk);
-                        listUkuran.add(keranjang[i].ukuran);
-                        listJumlah.add(keranjang[i].jumlah);
+                getChosen();
+                if(listProduk.size()==0){
+                    JOptionPane.showMessageDialog(null, "Belum ada barang yang dipilih");
+                } else {
+                    if (update(listProduk, listUkuran, listJumlah)) {
+                        frame.dispose();
+                        new KeranjangScreen();
                     }
-                }
-                if(update(listProduk,listUkuran,listJumlah)){
-                    frame.dispose();
-                    new KeranjangScreen();
                 }
             }
         });
-        
+
         //Button bayar
         JButton bayar = new JButton("bayar");
         bayar.setBounds(490, 0, 100, 50);
         bayar.setFont(fontButton);
-        bayar.addActionListener(new ActionListener(){
+        bayar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                getChosen();
+                if(listProduk.size()==0){
+                    JOptionPane.showMessageDialog(null, "Belum ada barang yang dipilih");
+                } else {
+                    frame.dispose();
+                    new BayarScreen(listProduk, listUkuran, listJumlah);
+                }
             }
         });
 
@@ -103,7 +117,7 @@ public class KeranjangScreen {
             gbc.gridwidth = GridBagConstraints.REMAINDER;
             gbc.weightx = 1;
             gbc.fill = GridBagConstraints.HORIZONTAL;
-            panelList.add(keranjang[i],gbc,0);
+            panelList.add(keranjang[i], gbc, 0);
         }
         frame.add(back);
         frame.add(delete);

@@ -20,10 +20,6 @@ public class EtalaseController {
     int[][] stok = new int[4][4];
     int[] tempIndex = new int[4];
 
-    public static void main(String[] args) {
-        new Etalase();
-    }
-
     public void refreshFrame() {
         frame.invalidate();
         frame.validate();
