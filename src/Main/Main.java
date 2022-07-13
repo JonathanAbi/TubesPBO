@@ -1,14 +1,15 @@
 
 package Main;
 
-import View.Register;
+import View.Etalase;
 
 public class Main {
+    
     public static void main(String[] args) {
         new Main();
-        System.out.println("tes");
     }
-    public void Main(){
-   
+    
+    public Main(){
+        new Etalase();
     }
 }

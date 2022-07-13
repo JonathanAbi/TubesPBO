@@ -17,7 +17,7 @@ public class RiwayatPembelianController {
         ArrayList<Pesanan> riwayatPembelian = new ArrayList<>();
         try{
             java.sql.Statement stat = conn.con.createStatement();
-            ResultSet result = stat.executeQuery("select * from pesanan where customer_id='" + SingletonProfile.getInstance().getUser().getId() + "' and status_pengiriman = 4");
+            ResultSet result = stat.executeQuery("select * from pesanan where customer_id='" + SingletonProfile.getInstance().getUser().getId() + "' and status_pengiriman = 3");
             while(result.next()){
                 Pesanan temp = new Pesanan(result.getInt("pesanan_id"),result.getInt("barang_id"),result.getInt("jumlah"),UkuranEnum.values()[result.getInt("ukuran")],result.getString("warna"),result.getDouble("harga_total"),result.getDouble("biaya_pengiriman"),PembayaranEnum.values()[result.getInt("jenis_pembayaran")]);
                 riwayatPembelian.add(temp);

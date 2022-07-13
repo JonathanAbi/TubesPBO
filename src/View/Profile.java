@@ -1,5 +1,6 @@
 package View;
 
+import Controller.LogOutController;
 import Controller.ProfileController;
 import Model.Alamat;
 import Model.Customer;
@@ -164,7 +165,28 @@ public class Profile {
         update.setBounds(300, 510, 180, 50);
         update.setFont(font1);
         update.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
+        
+        //button lihat riwayat pembelian
+        JButton riwayatPembelian = new JButton("Lihat Riwayat");
+        riwayatPembelian.setBounds(300, 570, 180, 50);
+        riwayatPembelian.setFont(font1);
+        riwayatPembelian.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        riwayatPembelian.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                new RiwayatPembelian();
+            }
+        });
+        
+        
+        //button lihat status pembelian
+        JButton statusPembelian = new JButton("Lihat Status");
+        statusPembelian.setBounds(100, 570, 180, 50);
+        statusPembelian.setFont(font1);
+        statusPembelian.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        //button back
         JButton backProfile = new JButton("Kembali");
         backProfile.setBounds(100, 510, 180, 50);
         backProfile.setFont(font1);
@@ -222,7 +244,7 @@ public class Profile {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 frame.dispose();
-                new ChooseLogin();
+                new Etalase();
             }
         });
         //button show pass
@@ -239,7 +261,19 @@ public class Profile {
                     pass.setEchoChar('\u2022');
                 }
             }
-
+        });
+        
+        //button log out
+        JButton logout = new JButton("Log Out");
+        logout.setBounds(10,10,100,50);
+        logout.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        logout.setFont(new Font("Serif",Font.PLAIN,15));
+        logout.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                new LogOutController();
+            }
         });
 
         frame.add(judul);
@@ -267,7 +301,10 @@ public class Profile {
         frame.add(backProfile);
         frame.add(show);
         frame.add(update);
+        frame.add(riwayatPembelian);
+        frame.add(statusPembelian);
         frame.add(backUpdate);
+        frame.add(logout);
         frame.setLayout(null);
         frame.setVisible(true);
     }

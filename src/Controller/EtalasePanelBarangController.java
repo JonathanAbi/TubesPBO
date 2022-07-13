@@ -161,24 +161,28 @@ public class EtalasePanelBarangController {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int jmlhBeli = (Integer)jumlah.getValue();
-                if (ukuran == null) {
-                    JOptionPane.showMessageDialog(null, "Mohon pilih ukuran terlebih dahulu");
-                }else if(stok[in] == 0){
-                    JOptionPane.showMessageDialog(null, "Maaf untuk ukuran tersebut stok habis");
-                }else if(jmlhBeli == 0){
-                    JOptionPane.showMessageDialog(null, "Jumlah beli harus lebih dari 0!!");
-                }else if(jmlhBeli > stok[in]){
-                    JOptionPane.showMessageDialog(null, "Maaf untuk ukuran tersebut stok tersisa " + stok[in]);
-                } else {
-                    try{
-                        SingletonKeranjang.getInstance().addBarang(produk);
-                        SingletonKeranjang.getInstance().addUkuran(ukuran);
-                        SingletonKeranjang.getInstance().addJumlah(jmlhBeli);
-                        updateDatabase(pointerDB, produk.getId(),stok[in]-jmlhBeli);
-                        updateStok(index);
-                    }catch(Exception a){
-                        JOptionPane.showMessageDialog(null, "Maaf gagal menambahkan barang ke dalam keranjang");
+                if(SingletonProfile.getInstance().getUser() == null){
+                    JOptionPane.showMessageDialog(null, "Mohon untuk login terlebih dahulu!");
+                }else{
+                    int jmlhBeli = (Integer)jumlah.getValue();
+                    if (ukuran == null) {
+                        JOptionPane.showMessageDialog(null, "Mohon pilih ukuran terlebih dahulu");
+                    }else if(stok[in] == 0){
+                        JOptionPane.showMessageDialog(null, "Maaf untuk ukuran tersebut stok habis");
+                    }else if(jmlhBeli == 0){
+                        JOptionPane.showMessageDialog(null, "Jumlah beli harus lebih dari 0!!");
+                    }else if(jmlhBeli > stok[in]){
+                        JOptionPane.showMessageDialog(null, "Maaf untuk ukuran tersebut stok tersisa " + stok[in]);
+                    } else {
+                        try{
+                            SingletonKeranjang.getInstance().addBarang(produk);
+                            SingletonKeranjang.getInstance().addUkuran(ukuran);
+                            SingletonKeranjang.getInstance().addJumlah(jmlhBeli);
+                            updateDatabase(pointerDB, produk.getId(),stok[in]-jmlhBeli);
+                            updateStok(index);
+                        }catch(Exception a){
+                            JOptionPane.showMessageDialog(null, "Maaf gagal menambahkan barang ke dalam keranjang");
+                        }
                     }
                 }
             }

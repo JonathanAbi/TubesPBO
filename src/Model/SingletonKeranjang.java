@@ -37,6 +37,7 @@ public class SingletonKeranjang {
         this.listProduk = new ArrayList<>();
         this.ukuran = new ArrayList<>();
         this.jumlah = new ArrayList<>();
+        this.length = 0;
     }
     
     public void addLength(){

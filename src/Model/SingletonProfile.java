@@ -4,7 +4,7 @@ package Model;
 public class SingletonProfile {
     
     private static SingletonProfile instance;
-    private User user;
+    private User user = null;
     
     private SingletonProfile(){
         
@@ -16,7 +16,11 @@ public class SingletonProfile {
         }
         return instance;
     }
-
+    
+    public void reset(){
+        this.user = null;
+    }
+    
     public User getUser() {
         return user;
     }
