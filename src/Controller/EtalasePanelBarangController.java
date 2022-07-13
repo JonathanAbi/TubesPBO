@@ -45,7 +45,7 @@ public class EtalasePanelBarangController {
             while(result.next()){
                 int id = result.getInt("barang_id");
                 String nama = result.getString("nama");
-                String berat = String.valueOf(result.getDouble("berat"));
+                Double berat = result.getDouble("berat");
                 String warna = result.getString("warna");
                 int[] stock = new int[4];
                 stock[0] = result.getInt("stok_ukuran_S");
