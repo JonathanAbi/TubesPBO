@@ -48,6 +48,9 @@ public class UpdateBarangMenu extends JFrame implements ActionListener {
         uTambahProduk.setFont(title);
         frame.add(uTambahProduk);
         
+        uStok.addActionListener(this);
+        uHarga.addActionListener(this);
+        uTambahProduk.addActionListener(this);
         
         frame.setVisible(true);
     }
@@ -55,10 +58,13 @@ public class UpdateBarangMenu extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==uStok) {
+            frame.dispose();
             new UpdateHarga();
         } else if(e.getSource()==uHarga) {
+            frame.dispose();
             new UpdateStock();
         } else if(e.getSource()==uTambahProduk) {
+            frame.dispose();
             new TambahProduk();
         }
     } 

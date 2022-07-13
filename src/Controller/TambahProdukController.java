@@ -34,7 +34,7 @@ public class TambahProdukController {
             c.disconnect();
             SingletonProdukController produkList = new SingletonProdukController();
             produkList.addProdukToSingleton();
-            return "Berhasil tamabah produk!";
+            return "Berhasil tambah produk!";
         } catch (SQLException e) {
             c.disconnect();
             return "gagal tambah produk!";

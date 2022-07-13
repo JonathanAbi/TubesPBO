@@ -11,7 +11,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -25,7 +28,7 @@ import javax.swing.JTextField;
  *
  * @author glenn
  */
-public class UpdateHarga extends JFrame implements ActionListener {
+public class UpdateHarga extends JFrame implements ActionListener, KeyListener, MouseListener {
 
     JFrame frame;
     JComboBox produkCb;
@@ -35,7 +38,8 @@ public class UpdateHarga extends JFrame implements ActionListener {
     Double hargaAkhir;
     UpdateHargaController harga = new UpdateHargaController();
     String[] nameList;
-    int produkIndex;
+    int produkIndex, produkId;
+    JLabel exit;
 
     public static void main(String[] args) {
         new UpdateHarga();
@@ -46,7 +50,6 @@ public class UpdateHarga extends JFrame implements ActionListener {
         frame.setSize(450, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
-        
 
         Font titleF = new Font("Sans Serif", Font.BOLD, 35);
         JLabel title = new JLabel("Update Stok");
@@ -65,7 +68,7 @@ public class UpdateHarga extends JFrame implements ActionListener {
         namaProduk.setBounds(15, 10, 150, 27);
         namaProduk.setFont(regularF);
         inputArea.add(namaProduk);
-        
+
         nameList = harga.getNameList();
         produkCb = new JComboBox(nameList);
         produkCb.setSelectedIndex(-1);
@@ -93,6 +96,7 @@ public class UpdateHarga extends JFrame implements ActionListener {
         hargaAkhirTf = new JTextField();
         hargaAkhirTf.setBounds(170, 83, 250, 27);
         hargaAkhirTf.setForeground(Color.blue);
+        hargaAkhirTf.setEditable(false);
         hargaAkhirTf.setFont(regularF);
         inputArea.add(hargaAkhirTf);
 
@@ -100,9 +104,17 @@ public class UpdateHarga extends JFrame implements ActionListener {
         update.setBounds(15, 126, 200, 50);
         update.setFont(regularF);
         inputArea.add(update);
+        
+        exit = new JLabel("<<Kembali ke update menu");
+        exit.setBounds(15, 185, 170, 18);
+        inputArea.add(exit);
 
         produkCb.addActionListener(this);
         update.addActionListener(this);
+
+        hargaAkhirTf.addKeyListener(this);
+        
+        exit.addMouseListener(this);
 
         inputArea.setLayout(null);
         frame.add(inputArea);
@@ -113,22 +125,74 @@ public class UpdateHarga extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == produkCb) {
-            
+            hargaAkhirTf.setEditable(true);
             produkIndex = produkCb.getSelectedIndex();
             Produk produk = harga.getProdukByIndex(produkIndex);
+            produkId = produk.getId();
             hargaAwalTf.setText(produk.getHarga().toString());
             hargaAkhirTf.setText("");
         } else if (e.getSource() == update) {
-            try {
-                hargaAkhir = Double.parseDouble(hargaAkhirTf.getText());
-                JOptionPane.showMessageDialog(null, "Harga berhasil di Update!");
-                
-            } catch (NumberFormatException ea) {
-                hargaAkhirTf.setText("");
-                JOptionPane.showMessageDialog(null, "Input hanya boleh angka");
+            if (hargaAwalTf.getText().isBlank() || hargaAkhirTf.getText().isBlank()) {
+                JOptionPane.showMessageDialog(null, "input tidak boleh kosong");
+            } else {
+                double hargaAkhir = Double.parseDouble(hargaAkhirTf.getText());
+                frame.dispose();
+                JOptionPane.showMessageDialog(null, harga.updateHargaToDB(produkId, hargaAkhir));
+                new UpdateBarangMenu();
             }
         }
     }
-    
-    
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if (e.getSource() == hargaAkhirTf) {
+            doubleInputCheck(hargaAkhirTf);
+        }
+    }
+
+    void doubleInputCheck(JTextField tf) {
+        try {
+            Double.parseDouble(tf.getText());
+        } catch (NumberFormatException ea) {
+            tf.setText("");
+            JOptionPane.showMessageDialog(null, "input harus double");
+        }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {}
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        if (e.getSource()==exit) {
+            frame.dispose();
+            new UpdateBarangMenu();
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        if (e.getSource()==exit) {
+            exit.setForeground(Color.red);
+        }
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        if (e.getSource()==exit) {
+            exit.setForeground(Color.black);
+        }
+    }
+
 }
