@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import View.Etalase;
+import View.*;
 import View.KeranjangScreen;
 
 public class EtalaseController {
@@ -47,7 +47,33 @@ public class EtalaseController {
         frame = new JFrame("Etalase");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 700);
-
+        
+        //Button login
+        JButton login = new JButton("Log In");
+        login.setBounds(10, 10, 75, 50);
+        login.setFont(fontButton);
+        login.setVisible(false);
+        login.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                new ChooseLogin();
+            }
+        });
+        
+        //Button profile
+        JButton profile = new JButton("Profile");
+        profile.setBounds(10, 10, 75, 50);
+        profile.setFont(fontButton);
+        profile.setVisible(false);
+        profile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                new Profile();
+            }
+        });
+        
         //panel judul
         JPanel panelJudul = new JPanel();
         panelJudul.setPreferredSize(new Dimension(600, 100));
@@ -67,8 +93,12 @@ public class EtalaseController {
         buttonKeranjang.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.dispose();
-                new KeranjangScreen();
+                if(SingletonProfile.getInstance().getUser() != null){
+                    frame.dispose();
+                    new KeranjangScreen();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Mohon untuk login terlebih dahulu!");
+                }
             }
         });
 
@@ -116,7 +146,15 @@ public class EtalaseController {
             }
         });
 
+        if(SingletonProfile.getInstance().getUser() == null){
+            login.setVisible(true);
+        }else{
+            profile.setVisible(true);
+        }
+        
         //pengisian frame
+        frame.add(login);
+        frame.add(profile);
         frame.add(panelJudul, BorderLayout.NORTH);
         frame.add(panelListBarang, BorderLayout.CENTER);
         frame.add(next, BorderLayout.EAST);

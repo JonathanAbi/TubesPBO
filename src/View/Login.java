@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class Login {
-
+    
     JFrame frame = new JFrame("Login");
 
     public Login(String tipeUser) {
@@ -55,7 +55,7 @@ public class Login {
                     frame.dispose();
                     JOptionPane.showMessageDialog(null,result);
                     //masukin tujuan dibawah
-                    new RiwayatPembelian();
+                    new Etalase();
                 }else if(result.equals("Password Salah!")){
                     JOptionPane.showMessageDialog(null,result);
                     pass.setText("");

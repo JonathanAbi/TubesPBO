@@ -24,27 +24,34 @@ public class ChooseLogin implements ActionListener{
 
         //button admin
         JButton buttonAdmin = new JButton("Admin");
-        buttonAdmin.setBounds(180, 100, 120, 50);
+        buttonAdmin.setBounds(170, 80, 140, 50);
         buttonAdmin.setFont(font1);
         buttonAdmin.addActionListener(this);
         buttonAdmin.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         //button client
         JButton buttonClient = new JButton("Client");
-        buttonClient.setBounds(180, 160, 120, 50);
+        buttonClient.setBounds(170, 140, 140, 50);
         buttonClient.setFont(font1);
         buttonClient.addActionListener(this);
         buttonClient.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         //button kurir
         JButton buttonKurir = new JButton("Kurir");
-        buttonKurir.setBounds(180, 220, 120, 50);
+        buttonKurir.setBounds(170, 200, 140, 50);
         buttonKurir.setFont(font1);
         buttonKurir.addActionListener(this);
         buttonKurir.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
+        
+        //button register
+        JButton buttonRegister = new JButton("Register");
+        buttonRegister.setBounds(170,260,140,50);
+        buttonRegister.setFont(font1);
+        buttonRegister.addActionListener(this);
+        buttonRegister.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
         JButton buttonBack = new JButton("Kembali");
-        buttonBack.setBounds(180, 280, 120, 50);
+        buttonBack.setBounds(170, 320, 140, 50);
         buttonBack.setFont(font1);
         buttonBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
@@ -52,6 +59,7 @@ public class ChooseLogin implements ActionListener{
         frame.add(buttonAdmin);
         frame.add(buttonClient);
         frame.add(buttonKurir);
+        frame.add(buttonRegister);
         frame.add(buttonBack);
         frame.setLayout(null);
         frame.setVisible(true);
@@ -76,6 +84,8 @@ public class ChooseLogin implements ActionListener{
                 new Login("kurir");
                 break;
             case "Kembali":
+                frame.dispose();
+                new Etalase();
                 break;
             default: 
                 break;

@@ -3,7 +3,7 @@ package View;
 import Controller.EtalaseController;
 
 public class Etalase {
-        
+    
     public static void main(String[] args) {
         new Etalase();
     }
