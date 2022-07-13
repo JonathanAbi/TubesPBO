@@ -31,6 +31,18 @@ public class Pesanan{
         this.statusPembayaran = statusPembayaran;
         this.statusPengiriman = statusPengiriman;
     }
+
+    public Pesanan(int id, int barangID,int jumlah, UkuranEnum ukuran, String warna, Double hargaTotal, Double biayaPengiriman, PembayaranEnum jenisPembayaran) {
+        this.id = id;
+        this.jumlah = jumlah;
+        this.ukuran = ukuran;
+        this.warna = warna;
+        this.hargaTotal = hargaTotal;
+        this.biayaPengiriman = biayaPengiriman;
+        this.jenisPembayaran = jenisPembayaran;
+        this.barangId = barangID;
+    }
+    
     
     public int getId() {
         return id;
