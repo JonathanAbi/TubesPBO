@@ -5,6 +5,7 @@
  */
 package View;
 
+import Controller.TambahProdukController;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,7 +28,7 @@ public class TambahProduk extends JFrame implements ActionListener, KeyListener 
     JTextField namaProduk, berat, harga, warna, s, m, l, xl;
     JButton submit;
     String nama, warnaProduk;
-    Double beratProduk;
+    Double beratProduk, hargaProduk;
     int jumlahS, jumlahM, jumlahL, jumlahXL;
     
     public static void main(String[] args) {
@@ -36,7 +37,7 @@ public class TambahProduk extends JFrame implements ActionListener, KeyListener 
     
     public TambahProduk() {
         frame = new JFrame("Tambah Produk");
-        frame.setSize(450, 420);
+        frame.setSize(450, 450);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         
@@ -131,8 +132,18 @@ public class TambahProduk extends JFrame implements ActionListener, KeyListener 
         xl.setFont(regularF);
         inputArea.add(xl);
         
+        hargaLb = new JLabel("Harga:");
+        hargaLb.setBounds(15, 285, 150, 30);
+        hargaLb.setFont(regularF);
+        inputArea.add(hargaLb);
+        
+        harga = new JTextField();
+        harga.setBounds(170, 285, 250, 27);
+        harga.setFont(regularF);
+        inputArea.add(harga);
+        
         submit = new JButton("Submit");
-        submit.setBounds(15, 285, 150, 40);
+        submit.setBounds(15, 325, 150, 40);
         submit.setFont(regularF);
         inputArea.add(submit);
         
@@ -141,6 +152,7 @@ public class TambahProduk extends JFrame implements ActionListener, KeyListener 
         m.addKeyListener(this);
         l.addKeyListener(this);
         xl.addKeyListener(this);
+        harga.addKeyListener(this);
         
         submit.addActionListener(this);
         
@@ -151,7 +163,7 @@ public class TambahProduk extends JFrame implements ActionListener, KeyListener 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == submit) {
-            if (namaProduk.getText().isBlank() || berat.getText().isBlank() || warna.getText().isBlank() || s.getText().isBlank() || m.getText().isBlank() || l.getText().isBlank() || xl.getText().isBlank()) {
+            if (namaProduk.getText().isBlank() || berat.getText().isBlank() || warna.getText().isBlank() || s.getText().isBlank() || m.getText().isBlank() || l.getText().isBlank() || xl.getText().isBlank() || harga.getText().isBlank()) {
                 JOptionPane.showMessageDialog(null, "semua form harus terisi");
             } else {
                 nama = namaProduk.getText();
@@ -161,7 +173,17 @@ public class TambahProduk extends JFrame implements ActionListener, KeyListener 
                 jumlahM = Integer.parseInt(m.getText());
                 jumlahL = Integer.parseInt(l.getText());
                 jumlahXL = Integer.parseInt(xl.getText());
-                int[] stok = {jumlahS, jumlahM, jumlahL, jumlahXL};
+                hargaProduk = Double.parseDouble(harga.getText());
+                TambahProdukController tambah = new TambahProdukController();
+                JOptionPane.showMessageDialog(null, tambah.tambahProdukBaru(nama, beratProduk, warnaProduk, jumlahS, jumlahM, jumlahL, jumlahXL, hargaProduk));
+                namaProduk.setText("");
+                berat.setText("");
+                warna.setText("");
+                harga.setText("");
+                s.setText("");
+                m.setText("");
+                l.setText("");
+                xl.setText("");
             }
         }
     }
@@ -186,6 +208,8 @@ public class TambahProduk extends JFrame implements ActionListener, KeyListener 
             integerInputCheck(l);
         } else if (e.getSource() == xl) {
             integerInputCheck(xl);
+        } else if(e.getSource()==harga) {
+            doubleInputCheck(harga);
         }
     }
     
