@@ -5,15 +5,201 @@
  */
 package View;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 /**
  *
  * @author glenn
  */
-public class UpdateStock {
+public class UpdateStock extends JFrame implements ActionListener, KeyListener, MouseListener {
+
+    JFrame frame;
+    JComboBox produkCb, ukuranCb;
+    JTextField stokAwalTf, stokAkhirTf;
+    JButton update;
+    JLabel exit;
+    int produkIndex, ukuranIndex;
+
     public static void main(String[] args) {
         new UpdateStock();
     }
+
     public UpdateStock() {
-        
+        frame = new JFrame("Update Stok");
+        frame.setSize(450, 330);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+
+        Font titleF = new Font("Sans Serif", Font.BOLD, 35);
+        JLabel title = new JLabel("Update Stok");
+        title.setFont(titleF);
+        title.setBounds(0, 0, 450, 37);
+        title.setHorizontalAlignment(JLabel.CENTER);
+        frame.add(title);
+
+        JPanel inputArea = new JPanel();
+        inputArea.setBounds(0, 40, 500, 500);
+
+        Font regularF = new Font("Sans Serif", Font.PLAIN, 25);
+        JLabel namaProdukLb, ukuranLb, stokAwalLb, stokAkhirLb;
+
+        namaProdukLb = new JLabel("Pilih Produk:");
+        namaProdukLb.setBounds(15, 10, 150, 27);
+        namaProdukLb.setFont(regularF);
+        inputArea.add(namaProdukLb);
+
+        String[] apa = {"tes", "apa"};
+        produkCb = new JComboBox(apa);
+        produkCb.setSelectedIndex(-1);
+        produkCb.setBounds(170, 10, 250, 27);
+        inputArea.add(produkCb);
+
+        ukuranLb = new JLabel("Pilih Ukuran:");
+        ukuranLb.setBounds(15, 45, 150, 27);
+        ukuranLb.setFont(regularF);
+        inputArea.add(ukuranLb);
+
+        String[] ukuran = {"S", "M", "L", "XL"};
+        ukuranCb = new JComboBox(ukuran);
+        ukuranCb.setSelectedIndex(-1);
+        ukuranCb.setEnabled(false);
+        ukuranCb.setBounds(170, 45, 250, 27);
+        inputArea.add(ukuranCb);
+
+        stokAwalLb = new JLabel("Stok Awal:");
+        stokAwalLb.setBounds(15, 80, 150, 30);
+        stokAwalLb.setFont(regularF);
+        inputArea.add(stokAwalLb);
+
+        stokAwalTf = new JTextField();
+        stokAwalTf.setBounds(170, 80, 250, 27);
+        stokAwalTf.setText("-");
+        stokAwalTf.setFont(regularF);
+        stokAwalTf.setForeground(Color.red);
+        stokAwalTf.setEditable(false);
+        inputArea.add(stokAwalTf);
+
+        stokAkhirLb = new JLabel("Stok Akhir:");
+        stokAkhirLb.setBounds(15, 115, 150, 30);
+        stokAkhirLb.setFont(regularF);
+        inputArea.add(stokAkhirLb);
+
+        stokAkhirTf = new JTextField();
+        stokAkhirTf.setBounds(170, 115, 250, 27);
+        stokAkhirTf.setFont(regularF);
+        stokAkhirTf.setForeground(Color.blue);
+        stokAkhirTf.setEditable(false);
+        inputArea.add(stokAkhirTf);
+
+        update = new JButton("UPDATE");
+        update.setBounds(15, 150, 200, 50);
+        update.setFont(regularF);
+        inputArea.add(update);
+
+        exit = new JLabel("<<Kembali ke update menu");
+        exit.setBounds(15, 215, 170, 18);
+        inputArea.add(exit);
+
+        produkCb.addActionListener(this);
+        ukuranCb.addActionListener(this);
+        update.addActionListener(this);
+
+        stokAkhirTf.addKeyListener(this);
+
+        exit.addMouseListener(this);
+
+        inputArea.setLayout(null);
+        frame.add(inputArea);
+        frame.setLayout(null);
+        frame.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == produkCb) {
+            ukuranCb.setSelectedIndex(-1);
+            ukuranCb.setEnabled(true);
+            stokAkhirTf.setText("");
+            stokAkhirTf.setEditable(false);
+            produkIndex = produkCb.getSelectedIndex();
+        } else if (e.getSource() == ukuranCb) {
+            stokAkhirTf.setText("");
+            stokAkhirTf.setEditable(true);
+            ukuranIndex = ukuranCb.getSelectedIndex();
+        } else if (e.getSource() == update) {
+            if (stokAkhirTf.getText().isBlank()) {
+                JOptionPane.showMessageDialog(null, "Input tidak boleh kosong!");
+            } else {
+
+            }
+        }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if (e.getSource() == stokAkhirTf) {
+            integerInputCheck(stokAkhirTf);
+        }
+    }
+
+    void integerInputCheck(JTextField tf) {
+        try {
+            Integer.parseInt(tf.getText());
+        } catch (NumberFormatException ea) {
+            tf.setText("");
+            JOptionPane.showMessageDialog(null, "input harus integer");
+        }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        if (e.getSource() == exit) {
+            frame.dispose();
+            new UpdateBarangMenu();
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        if (e.getSource() == exit) {
+            exit.setForeground(Color.red);
+        }
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        if (e.getSource() == exit) {
+            exit.setForeground(Color.black);
+        }
     }
 }
