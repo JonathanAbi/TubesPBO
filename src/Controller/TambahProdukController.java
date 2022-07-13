@@ -32,7 +32,7 @@ public class TambahProdukController {
             stmt.setInt(8, jumlahXL);
             stmt.execute();
             c.disconnect();
-            SingletonProdukContorller produkList = new SingletonProdukContorller();
+            SingletonProdukController produkList = new SingletonProdukController();
             produkList.getProdukFromDB();
             return "Berhasil tamabah produk!";
         } catch (SQLException e) {

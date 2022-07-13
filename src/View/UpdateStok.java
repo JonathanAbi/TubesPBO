@@ -5,11 +5,13 @@
  */
 package View;
 
+import Controller.UpdateStokController;
+import Model.Produk;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.NumberFormat;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -18,7 +20,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.text.NumberFormatter;
 
 /**
  *
@@ -109,7 +110,9 @@ public class UpdateStok extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == produkCb) {
-            hargaAkhirIn.setText("");
+            
+            
+            hargaAkhirTf.setText("");
         } else if (e.getSource() == update) {
             try {
                 hargaAkhir = Double.parseDouble(hargaAkhirTf.getText());
@@ -121,4 +124,6 @@ public class UpdateStok extends JFrame implements ActionListener {
             }
         }
     }
+    
+    
 }

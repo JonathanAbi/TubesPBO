@@ -5,11 +5,26 @@
  */
 package Controller;
 
+import Model.Produk;
 import Model.SingletonProduk;
+import java.util.ArrayList;
 /**
  *
  * @author glenn
  */
 public class UpdateStokController {
-    SingletonProduk produk = SingletonProduk.getInstance();
+    SingletonProduk produkS = SingletonProduk.getInstance();
+    
+    public ArrayList<Produk> getProdukList() {
+        return produkS.getListProduk();        
+    }
+    public String[] getNameList() {
+        String[] nameList = new String[getProdukList().size()];
+        ArrayList<Produk> produkList = getProdukList();
+        for (int i = 0; i < nameList.length; i++) {
+            nameList[i] = produkList.get(i).getNama();
+            System.out.println("masuk");
+        }
+        return nameList;
+    }
 }

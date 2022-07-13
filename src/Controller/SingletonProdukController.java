@@ -15,11 +15,11 @@ import java.sql.ResultSet;
  *
  * @author glenn
  */
-public class SingletonProdukContorller {
+public class SingletonProdukController {
 
     SingletonProduk produkS = SingletonProduk.getInstance();
 
-    void getProdukFromDB() {
+    public void getProdukFromDB() {
         produkS.reset();
         DatabaseHandler c = new DatabaseHandler();
 
