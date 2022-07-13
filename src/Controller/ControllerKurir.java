@@ -5,7 +5,7 @@
  */
 package Controller;
 
-import KoneksiDatabase.DatabaseHandler;
+import Database.DatabaseHandler;
 import Model.Kurir;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
  * @author kevin
  */
 public class ControllerKurir {
+
     static DatabaseHandler conn = new DatabaseHandler();
     static Kurir kurir = new Kurir();
 
@@ -62,21 +63,29 @@ public class ControllerKurir {
 
     }
 
-    public static void hitungKapasitasBarang() {
-        if (kurir.getBeratBarangBawaan() < kurir.getKapasitasBeratBarang()) {
-            JOptionPane.showMessageDialog(null, "Barang sudah melebihi kapasitas");
-        }
-    }
-
     public static void updateKurir(String id, String nama, String username, String pass, String telepon, String kapasitas, String totalBerat) {
         conn.connect();
-        String query = "UPDATE kurir SET nama='" + nama + "', "
-                + "username='" + username + "', "
-                + "pass='" + pass + "' "
-                + "telepon='" + telepon + "' "
-                + "kapasitas_berat_barang='" + kapasitas + "' "
-                + "total_berat_barang='" + totalBerat + "' "
-                + "WHERE kurir_id='" + id + "'";
+        String query = "UPDATE kurir SET nama='" + nama
+                + "',username='" + username
+                + "',pass='" + pass
+                + "',telepon='" + telepon
+                + "',kapasitas_berat_barang='" + kapasitas
+                + "',total_berat_barang='" + totalBerat
+                + "' WHERE kurir_id='" + id + "'";
+        
+        try {
+            MessageDigest m = MessageDigest.getInstance("MD5");
+            m.update(pass.getBytes());
+            byte[] bytes = m.digest();
+            StringBuilder s = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                s.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            pass = s.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
         try {
             Statement stmt = conn.con.createStatement();
             stmt.executeUpdate(query);

@@ -5,7 +5,7 @@
  */
 package View;
 
-import KoneksiDatabase.DatabaseHandler;
+import Database.DatabaseHandler;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -81,7 +81,7 @@ public class ViewDataKurir {
             public void actionPerformed(ActionEvent ae
             ) {
 
-                new ViewPengiriman();
+                new AddDataKurir();
 
             }
         });
@@ -92,7 +92,7 @@ public class ViewDataKurir {
             public void actionPerformed(ActionEvent ae
             ) {
 
-                new ViewPengiriman();
+                new AddDataKurir();
 
             }
         });
