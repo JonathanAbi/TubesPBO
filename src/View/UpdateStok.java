@@ -33,6 +33,8 @@ public class UpdateStok extends JFrame implements ActionListener {
     JButton update;
     JFormattedTextField hargaAkhirIn;
     Double hargaAkhir;
+    UpdateStokController stok;
+    String[] nameList;
 
     public static void main(String[] args) {
         new UpdateStok();
@@ -64,7 +66,9 @@ public class UpdateStok extends JFrame implements ActionListener {
         inputArea.add(namaProduk);
 
         String[] apa = {"test", "halo"};
-        produkCb = new JComboBox(apa);
+        stok = new UpdateStokController();
+        nameList = stok.getNameList();
+        produkCb = new JComboBox(nameList);
         produkCb.setSelectedIndex(-1);
         produkCb.setBounds(170, 10, 250, 27);
         inputArea.add(produkCb);

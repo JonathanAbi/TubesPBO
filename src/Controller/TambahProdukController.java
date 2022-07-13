@@ -33,7 +33,7 @@ public class TambahProdukController {
             stmt.execute();
             c.disconnect();
             SingletonProdukController produkList = new SingletonProdukController();
-            produkList.getProdukFromDB();
+            produkList.addProdukToSingleton();
             return "Berhasil tamabah produk!";
         } catch (SQLException e) {
             c.disconnect();

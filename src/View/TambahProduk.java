@@ -174,8 +174,6 @@ public class TambahProduk extends JFrame implements ActionListener, KeyListener 
                 jumlahL = Integer.parseInt(l.getText());
                 jumlahXL = Integer.parseInt(xl.getText());
                 hargaProduk = Double.parseDouble(harga.getText());
-                TambahProdukController tambah = new TambahProdukController();
-                JOptionPane.showMessageDialog(null, tambah.tambahProdukBaru(nama, beratProduk, warnaProduk, jumlahS, jumlahM, jumlahL, jumlahXL, hargaProduk));
                 namaProduk.setText("");
                 berat.setText("");
                 warna.setText("");
@@ -184,6 +182,9 @@ public class TambahProduk extends JFrame implements ActionListener, KeyListener 
                 m.setText("");
                 l.setText("");
                 xl.setText("");
+                TambahProdukController tambah = new TambahProdukController();
+                JOptionPane.showMessageDialog(null, tambah.tambahProdukBaru(nama, beratProduk, warnaProduk, jumlahS, jumlahM, jumlahL, jumlahXL, hargaProduk));
+                
             }
         }
     }

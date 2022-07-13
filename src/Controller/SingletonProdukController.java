@@ -19,7 +19,7 @@ public class SingletonProdukController {
 
     SingletonProduk produkS = SingletonProduk.getInstance();
 
-    public void getProdukFromDB() {
+    public void addProdukToSingleton() {
         produkS.reset();
         DatabaseHandler c = new DatabaseHandler();
 
