@@ -9,6 +9,7 @@ public class Produk{
     private int[] stock;
     private Double harga;
 
+    
     public Produk(String nama, Double berat, String warna, int[] stock, Double harga, int id) {
         this.id = id;
         this.nama = nama;
