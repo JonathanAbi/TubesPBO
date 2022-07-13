@@ -59,10 +59,10 @@ public class UpdateBarangMenu extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==uStok) {
             frame.dispose();
-            new UpdateHarga();
+            new UpdateStock();
         } else if(e.getSource()==uHarga) {
             frame.dispose();
-            new UpdateStock();
+            new UpdateHarga();
         } else if(e.getSource()==uTambahProduk) {
             frame.dispose();
             new TambahProduk();
