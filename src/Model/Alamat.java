@@ -2,6 +2,7 @@ package Model;
 
 public class Alamat {
 
+    private int id;
     private String alamatLengkap;
     private String kelurahan;
     private String kecamatan;
@@ -14,7 +15,8 @@ public class Alamat {
 
     }
 
-    public Alamat(String alamatLengkap, String kelurahan, String kecamatan, String kota, String provinsi, String kodePos, int status) {
+    public Alamat(int id,String alamatLengkap, String kelurahan, String kecamatan, String kota, String provinsi, String kodePos, int status) {
+        this.id = id;
         this.alamatLengkap = alamatLengkap;
         this.kelurahan = kelurahan;
         this.kecamatan = kecamatan;
@@ -26,6 +28,14 @@ public class Alamat {
         } else {
             this.status = AlamatEnum.TEMPORARY;
         }
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getAlamatLengkap() {

@@ -33,7 +33,7 @@ public class LoginController {
                         ArrayList<Alamat> listAlamat = new ArrayList<>();
                         result = stat.executeQuery("select * from alamat where customer_id='" + result.getString("customer_id") + "'");
                         while (result.next()) {
-                            Alamat temp = new Alamat(result.getString("alamat"), result.getString("kelurahan"), result.getString("kecamatan"), result.getString("kota"), result.getString("provinsi"), result.getString("kode_post"), result.getInt("alamat_status"));
+                            Alamat temp = new Alamat(result.getInt("alamat_id"),result.getString("alamat"), result.getString("kelurahan"), result.getString("kecamatan"), result.getString("kota"), result.getString("provinsi"), result.getString("kode_post"), result.getInt("alamat_status"));
                             listAlamat.add(temp);
                         }
                         Customer customer = new Customer(listAlamat, telepon, nama, username, tempPass, id);

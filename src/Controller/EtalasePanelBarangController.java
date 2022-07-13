@@ -27,9 +27,10 @@ public class EtalasePanelBarangController {
             stat.setInt(2,id);
             stat.executeUpdate();
             getProduk();
+            JOptionPane.showMessageDialog(null, "Berhasil menambahkan barang ke keranjang");
         }
         catch (SQLException e){
-            JOptionPane.showMessageDialog(null, "Error update barang ke database");
+            JOptionPane.showMessageDialog(null, "Database Error!! Gagal menambahkan barang ke keranjang");
         }
         conn.disconnect();
     }
