@@ -5,6 +5,9 @@
  */
 package View;
 
+import Controller.UpdateStokController;
+import Model.Produk;
+import Model.UkuranEnum;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -33,6 +36,8 @@ public class UpdateStock extends JFrame implements ActionListener, KeyListener, 
     JButton update;
     JLabel exit;
     int produkIndex, ukuranIndex;
+    UpdateStokController stok = new UpdateStokController();
+    Produk produk;
 
     public static void main(String[] args) {
         new UpdateStock();
@@ -62,8 +67,8 @@ public class UpdateStock extends JFrame implements ActionListener, KeyListener, 
         namaProdukLb.setFont(regularF);
         inputArea.add(namaProdukLb);
 
-        String[] apa = {"tes", "apa"};
-        produkCb = new JComboBox(apa);
+        String[] produkNameList = stok.getNameList();
+        produkCb = new JComboBox(produkNameList);
         produkCb.setSelectedIndex(-1);
         produkCb.setBounds(170, 10, 250, 27);
         inputArea.add(produkCb);
@@ -73,7 +78,11 @@ public class UpdateStock extends JFrame implements ActionListener, KeyListener, 
         ukuranLb.setFont(regularF);
         inputArea.add(ukuranLb);
 
-        String[] ukuran = {"S", "M", "L", "XL"};
+        UkuranEnum[] ukuranE = UkuranEnum.values();
+        String[] ukuran = new String[ukuranE.length];
+        for (int i = 0; i < ukuranE.length; i++) {
+            ukuran[i] = ukuranE[i].getString();
+        }
         ukuranCb = new JComboBox(ukuran);
         ukuranCb.setSelectedIndex(-1);
         ukuranCb.setEnabled(false);
@@ -131,20 +140,26 @@ public class UpdateStock extends JFrame implements ActionListener, KeyListener, 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == produkCb) {
-            ukuranCb.setSelectedIndex(-1);
-            ukuranCb.setEnabled(true);
             stokAkhirTf.setText("");
             stokAkhirTf.setEditable(false);
             produkIndex = produkCb.getSelectedIndex();
-        } else if (e.getSource() == ukuranCb) {
+            ukuranCb.setEnabled(true);
+            ukuranCb.setSelectedIndex(-1);
+        } else if (e.getSource() == ukuranCb && ukuranCb.getSelectedIndex() != -1) {
             stokAkhirTf.setText("");
             stokAkhirTf.setEditable(true);
             ukuranIndex = ukuranCb.getSelectedIndex();
+            String jumlah = stok.getProdukStock(produkIndex, ukuranIndex) + "";
+            stokAwalTf.setText(jumlah);
         } else if (e.getSource() == update) {
             if (stokAkhirTf.getText().isBlank()) {
                 JOptionPane.showMessageDialog(null, "Input tidak boleh kosong!");
             } else {
-
+                int jumlah = Integer.parseInt(stokAkhirTf.getText());
+                produk = stok.getProdukByIndex(produkIndex);
+                JOptionPane.showMessageDialog(null, stok.updateStokToDB(produk.getId(), ukuranIndex, jumlah));
+                frame.dispose();
+                new UpdateBarangMenu();
             }
         }
     }

@@ -45,7 +45,7 @@ public class UpdateHarga extends JFrame implements ActionListener, KeyListener, 
     }
 
     public UpdateHarga() {
-        frame = new JFrame("Update Stok");
+        frame = new JFrame("Update Harga");
         frame.setSize(450, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
