@@ -113,7 +113,7 @@ public class UpdateStok extends JFrame implements ActionListener {
         } else if (e.getSource() == update) {
             try {
                 hargaAkhir = Double.parseDouble(hargaAkhirTf.getText());
-                JOptionPane.showMessageDialog(null, hargaAkhir);
+                JOptionPane.showMessageDialog(null, "Harga berhasil di Update!");
                 
             } catch (NumberFormatException ea) {
                 hargaAkhirTf.setText("");
