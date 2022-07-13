@@ -19,6 +19,6 @@ public class TambahProdukContorller {
     }
     
     void tambahProdukBaru(String nama, Double berat, String warna, int[] stock, Double harga) {
-//        Produk newProduk = produk
+        
     }
 }
