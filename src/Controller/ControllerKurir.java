@@ -10,6 +10,7 @@ import Model.Kurir;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
@@ -107,6 +108,24 @@ public class ControllerKurir {
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Gagal menghapus data");
+        }
+    }
+    
+    public static String PencarianController(String id) {
+        String query;
+        try {
+            DatabaseHandler conn = new DatabaseHandler();
+            conn.connect();
+            java.sql.Statement stat = conn.con.createStatement();
+            ResultSet result = stat.executeQuery("select * from kurir where kurir_id='" + id + "'");
+            if (result.next()) {
+                return "berhasil";
+            } else {
+                return "tidak ditemukan";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "error";
         }
     }
 }

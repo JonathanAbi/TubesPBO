@@ -6,6 +6,7 @@
 package View;
 
 import Controller.ControllerKurir;
+import Controller.SingletonKurir;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -84,25 +85,18 @@ public class AddDataKurir {
         JTextField totalKapasitas = new JTextField();
 
         id.setBounds(210, 100, 120, 30);
-        id.setBackground(Color.WHITE);
 
         nama.setBounds(210, 150, 200, 30);
-        nama.setBackground(Color.WHITE);
 
         username.setBounds(210, 200, 200, 30);
-        username.setBackground(Color.WHITE);
 
         pass.setBounds(210, 250, 200, 30);
-        pass.setBackground(Color.WHITE);
 
         telepon.setBounds(210, 300, 200, 30);
-        telepon.setBackground(Color.WHITE);
 
         kapasitasBarang.setBounds(210, 350, 100, 30);
-        kapasitasBarang.setBackground(Color.WHITE);
 
         totalKapasitas.setBounds(210, 400, 100, 30);
-        totalKapasitas.setBackground(Color.WHITE);
 
         // Absolute Position
         JButton buttonSave = new JButton("SAVE");
@@ -146,6 +140,7 @@ public class AddDataKurir {
             ) {
                 if (Integer.parseInt(kapasitasBarang.getText()) < Integer.parseInt(totalKapasitas.getText())) {
                     JOptionPane.showMessageDialog(null, "Barang sudah melebihi kapasitas. Akan berbahaya bagi anda");
+                    totalKapasitas.setText("");
                 } else if (id.getText().isEmpty() || nama.getText().isEmpty() || telepon.getText().isEmpty() || kapasitasBarang.getText().isEmpty()
                         || totalKapasitas.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Semua kolom wajib diisi!");
@@ -182,7 +177,7 @@ public class AddDataKurir {
                     JOptionPane.showMessageDialog(null, "Semua kolom wajib diisi!");
                 } else {
                     ControllerKurir.updateKurir(id.getText(), nama.getText(), username.getText(), pass.getText(), telepon.getText(), kapasitasBarang.getText(), totalKapasitas.getText());
-                    new ViewDataKurir();
+                    new UpdateTerimaPengiriman();
                 }
 
             }
