@@ -47,6 +47,7 @@ public class EtalaseController {
         frame = new JFrame("Etalase");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 700);
+        frame.setLocationRelativeTo(null);
         
         //Button login
         JButton login = new JButton("Log In");

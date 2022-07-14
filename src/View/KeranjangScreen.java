@@ -47,7 +47,7 @@ public class KeranjangScreen {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 700);
         frame.setLayout(null);
-
+        frame.setLocationRelativeTo(null);
         //Button back
         JButton back = new JButton("back");
         back.setBounds(0, 0, 100, 50);
@@ -68,7 +68,7 @@ public class KeranjangScreen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 getChosen();
-                if(listProduk.size()==0){
+                if (listProduk.size() == 0) {
                     JOptionPane.showMessageDialog(null, "Belum ada barang yang dipilih");
                 } else {
                     if (update(listProduk, listUkuran, listJumlah)) {
@@ -87,7 +87,7 @@ public class KeranjangScreen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 getChosen();
-                if(listProduk.size()==0){
+                if (listProduk.size() == 0) {
                     JOptionPane.showMessageDialog(null, "Belum ada barang yang dipilih");
                 } else {
                     frame.dispose();
