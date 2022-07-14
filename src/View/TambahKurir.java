@@ -5,6 +5,7 @@
  */
 package View;
 
+import Controller.TambahKurirController;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -31,6 +32,7 @@ public class TambahKurir extends JFrame implements ActionListener, KeyListener, 
     JTextField namaTf, usernameTf, teleponTf, kapasitasBarangTf;
     JPasswordField passwordJp;
     JButton submit;
+    TambahKurirController kurir = new TambahKurirController();
 
     public static void main(String[] args) {
         new TambahKurir();
@@ -117,6 +119,7 @@ public class TambahKurir extends JFrame implements ActionListener, KeyListener, 
         submit.addActionListener(this);
         
         kapasitasBarangTf.addKeyListener(this);
+        teleponTf.addKeyListener(this);
 
         frame.setLayout(null);
         frame.setVisible(true);
@@ -128,11 +131,13 @@ public class TambahKurir extends JFrame implements ActionListener, KeyListener, 
             if (namaTf.getText().isBlank()||usernameTf.getText().isBlank()||passwordJp.getText().isBlank()||teleponTf.getText().isBlank()||kapasitasBarangTf.getText().isBlank()) {
                 JOptionPane.showMessageDialog(null, "Form harus terisi semua!");
             } else {
+                frame.dispose();
                 String nama = namaTf.getText();
                 String username = usernameTf.getText();
                 String password = passwordJp.getText();
                 String telepon = teleponTf.getText();
                 double kapasitas = Double.parseDouble(kapasitasBarangTf.getText());
+                JOptionPane.showMessageDialog(null, kurir.addKurir(nama, username, password, telepon, kapasitas));
             }
         }
     }
@@ -147,6 +152,8 @@ public class TambahKurir extends JFrame implements ActionListener, KeyListener, 
     public void keyReleased(KeyEvent e) {
         if (e.getSource()==kapasitasBarangTf) {
             doubleInputCheck(kapasitasBarangTf);
+        } else if(e.getSource()==teleponTf) {
+            integerInputCheck(teleponTf);
         }
     }
     
@@ -156,6 +163,15 @@ public class TambahKurir extends JFrame implements ActionListener, KeyListener, 
         } catch (NumberFormatException ea) {
             tf.setText("");
             JOptionPane.showMessageDialog(null, "input harus double");
+        }
+    }
+    
+    void integerInputCheck(JTextField tf) {
+        try {
+            Integer.parseInt(tf.getText());
+        } catch (NumberFormatException ea) {
+            tf.setText("");
+            JOptionPane.showMessageDialog(null, "input harus berupa angkat");
         }
     }
 
@@ -168,7 +184,7 @@ public class TambahKurir extends JFrame implements ActionListener, KeyListener, 
         if (e.getSource() == exit) {
             frame.dispose();
             new MenuAdmin();
-        }
+        } 
     }
 
     @Override
