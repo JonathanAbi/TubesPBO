@@ -7,12 +7,12 @@ package Controller;
 
 import Database.DatabaseHandler;
 import Model.Alamat;
-import Model.AlamatEnum;
 import Model.Customer;
 import Model.SingletonCustomer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,42 +21,36 @@ import java.util.ArrayList;
 public class SingletonCustomerController {
     SingletonCustomer customerS = SingletonCustomer.getInstance();
 
-    public void addCustomerToSingleton() {
+    public void addCustomerToDB() {
         customerS.reset();
         DatabaseHandler c = new DatabaseHandler();
-
         try {
             c.connect();
-
-            PreparedStatement stmt;
             String query = "SELECT * FROM customers";
-            stmt = c.con.prepareStatement(query);
+            PreparedStatement stmt = c.con.prepareStatement(query);
             ResultSet result = stmt.executeQuery();
-            while (result.next()) {
-                String name = result.getString("nama");
+            while(result.next()) {
+                int id = result.getInt("customer_id");
+                String nama = result.getString("nama");
                 String username = result.getString("username");
                 String password = result.getString("pass");
-                String alamat = result.getString("alamat");
-                int id = result.getInt("customer_id");
-                ArrayList<Alamat> listAlamat = getAlamatList(id);
                 String telepon = result.getString("telepon");
-                Customer customer = new Customer(listAlamat, telepon, name, username, password, id);
+                ArrayList<Alamat> listAlamat = getAlamatList(id);
+                Customer customer = new Customer(listAlamat, telepon, nama, username, password, id);
                 customerS.addCustomer(customer);
             }
-
+            
             c.disconnect();
         } catch (Exception e) {
         }
-
     }
     
     ArrayList<Alamat> getAlamatList(int customerId) {
         ArrayList<Alamat> listAlamat = new ArrayList<>();
         DatabaseHandler c = new DatabaseHandler();
-        
+
         try {
             c.connect();
-            
             String query = "SELECT * FROM alamat WHERE customer_id = ?";
             PreparedStatement stmt = c.con.prepareStatement(query);
             stmt.setInt(1, customerId);
@@ -68,14 +62,13 @@ public class SingletonCustomerController {
                 String kecamatan = result.getString("kecamatan");
                 String kota = result.getString("kota");
                 String provinsi = result.getString("provinsi");
-                String kodePos = result.getString("kodePos");
+                String kodePos = result.getString("kode_post");
                 int alamatStatus = result.getInt("alamat_status");
                 Alamat alamat = new Alamat(id, alamatLengkap, kelurahan, kecamatan, kota, provinsi, kodePos, alamatStatus);
                 listAlamat.add(alamat);
             }
             c.disconnect();
         } catch (Exception e) {
-            c.disconnect();
         }
         return listAlamat;
     }
