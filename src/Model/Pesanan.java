@@ -3,7 +3,6 @@ package Model;
 
 public class Pesanan{
     private int id;
-    private int paketId;
     private int customerId;
     private int kurirId;
     private int barangId;
@@ -17,9 +16,8 @@ public class Pesanan{
     private boolean statusPembayaran;
     private PengirimanEnum statusPengiriman;
     
-    public Pesanan(int id, int paketId, int customerId, int kurirId, int barangId, int alamatId, int jumlah, UkuranEnum ukuran, String warna, Double hargaSatuan, Double biayaPengiriman, PembayaranEnum jenisPembayaran, boolean statusPembayaran, PengirimanEnum statusPengiriman) {
+    public Pesanan(int id, int customerId, int kurirId, int barangId, int alamatId, int jumlah, UkuranEnum ukuran, String warna, Double hargaSatuan, Double biayaPengiriman, PembayaranEnum jenisPembayaran, boolean statusPembayaran, PengirimanEnum statusPengiriman) {
         this.id = id;
-        this.paketId = paketId;
         this.customerId = customerId;
         this.kurirId = kurirId;
         this.barangId = barangId;
@@ -57,13 +55,6 @@ public class Pesanan{
         this.id = id;
     }
     
-    public int getPaketId() {
-        return paketId;
-    }
-
-    public void setPaketId(int paketId) {
-        this.paketId = paketId;
-    }
 
     public int getCustomerId() {
         return customerId;
