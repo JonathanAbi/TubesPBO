@@ -8,10 +8,6 @@ import javax.swing.*;
 
 public class Register {
 
-    public static void main(String[] args) {
-        new Register();
-    }
-
     public Register() {
         RegisterController controller = new RegisterController();
         JFrame frame = new JFrame("Form Registrasi");
