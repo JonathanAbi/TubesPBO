@@ -9,11 +9,13 @@ import Controller.RiwayatPenjualanController;
 import Model.Customer;
 import Model.Pesanan;
 import Model.Produk;
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -21,9 +23,10 @@ import javax.swing.JTable;
  *
  * @author glenn
  */
-public class RiwayatPenjualan {
+public class RiwayatPenjualan extends JFrame implements MouseListener{
     JFrame frame;
     JTable table;
+    JLabel exit;
     RiwayatPenjualanController riwayat = new RiwayatPenjualanController();
     
     
@@ -31,24 +34,16 @@ public class RiwayatPenjualan {
         new RiwayatPenjualan();
     }
     RiwayatPenjualan() {
-        frame = new JFrame("Tambah Produk");
-        frame.setSize(450, 490);
+        frame = new JFrame("Riwayat Penjualan");
+        frame.setSize(1100, 490);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
 
-        JLabel title, namaProdukLb, beratLb, hargaLb, ukuranLb, warnaLb, sLb, mLb, lLb, xlLb;
-        Font titleF = new Font("Sans Serif", Font.BOLD, 35);
-
-        title = new JLabel("Riwayat Penjualan");
-        title.setFont(titleF);
-        title.setBounds(0, 0, 450, 37);
-        title.setHorizontalAlignment(JLabel.CENTER);
-        frame.add(title);
         
         String[] column = {"ID Pesanan", "Nama", "Produk", "Ukuran", "Jumlah", "Harga Total", "Status Pengiriman"};
         ArrayList<Pesanan> pesananList = riwayat.getPesananList();
         String[][] rData = new String[pesananList.size()][column.length];
-        for (int i = 0; i < rData.length; i++) {
+        for (int i = rData.length-1; i >= 0; i--) {
             Pesanan pesanan = pesananList.get(i);
             rData[i][0] = pesanan.getId()+"";
             int cutomerId = pesanan.getCustomerId();
@@ -63,11 +58,48 @@ public class RiwayatPenjualan {
             rData[i][6] = pesanan.getStatusPengiriman().getString();
         }
         table = new JTable(rData, column);
-        table.setBounds(40, 0, 450, 450);
         JScrollPane sp = new JScrollPane(table);
-        frame.add(sp);
+        table.setFont(new Font("Sans Serif", Font.PLAIN, 20));
+        table.setRowHeight(30);
+        table.setEnabled(false);
         
-        frame.setLayout(null);
+        exit = new JLabel("<<Kembali ke menu admin");
+        exit.setBounds(30, 420, 170, 18);
+        frame.add(exit);
+        
+        exit.addMouseListener(this);
+        
+        frame.add(sp);
         frame.setVisible(true);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        if (e.getSource() == exit) {
+            frame.dispose();
+            new MenuAdmin();
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        if (e.getSource() == exit) {
+            exit.setForeground(Color.red);
+        }
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        if (e.getSource() == exit) {
+            exit.setForeground(Color.black);
+        }
     }
 }
