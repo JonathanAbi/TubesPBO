@@ -5,6 +5,7 @@
  */
 package View;
 
+import Model.SingletonProfile;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -113,6 +114,7 @@ public class MenuAdmin extends JFrame implements ActionListener, MouseListener{
     public void mousePressed(MouseEvent e) {
         if (e.getSource() == exit) {
             frame.dispose();
+            SingletonProfile.getInstance().reset();
             new ChooseLogin();
         }
     }
