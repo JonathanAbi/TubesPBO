@@ -16,7 +16,7 @@ public class Pesanan{
     private PembayaranEnum jenisPembayaran;
     private boolean statusPembayaran;
     private PengirimanEnum statusPengiriman;
-
+    
     public Pesanan(int id, int paketId, int customerId, int kurirId, int barangId, int alamatId, int jumlah, UkuranEnum ukuran, String warna, Double hargaSatuan, Double biayaPengiriman, PembayaranEnum jenisPembayaran, boolean statusPembayaran, PengirimanEnum statusPengiriman) {
         this.id = id;
         this.paketId = paketId;

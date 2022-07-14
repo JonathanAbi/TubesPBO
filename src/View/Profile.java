@@ -185,6 +185,13 @@ public class Profile {
         statusPembelian.setBounds(100, 570, 180, 50);
         statusPembelian.setFont(font1);
         statusPembelian.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        statusPembelian.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                new StatusPembelian();
+            }
+        });
         
         //button back
         JButton backProfile = new JButton("Kembali");
