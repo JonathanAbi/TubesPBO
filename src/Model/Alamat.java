@@ -1,21 +1,41 @@
-
 package Model;
 
 public class Alamat {
+
+    private int id;
     private String alamatLengkap;
     private String kelurahan;
     private String kecamatan;
     private String kota;
     private String provinsi;
-    private int kodePos;
+    private String kodePos;
+    private AlamatEnum status;
 
-    public Alamat(String alamatLengkap, String kelurahan, String kecamatan, String kota, String provinsi, int kodePos) {
+    public Alamat() {
+
+    }
+
+    public Alamat(int id,String alamatLengkap, String kelurahan, String kecamatan, String kota, String provinsi, String kodePos, int status) {
+        this.id = id;
         this.alamatLengkap = alamatLengkap;
         this.kelurahan = kelurahan;
         this.kecamatan = kecamatan;
         this.kota = kota;
         this.provinsi = provinsi;
         this.kodePos = kodePos;
+        if (status == 0) {
+            this.status = AlamatEnum.PERMANENT;
+        } else {
+            this.status = AlamatEnum.TEMPORARY;
+        }
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getAlamatLengkap() {
@@ -58,12 +78,24 @@ public class Alamat {
         this.provinsi = provinsi;
     }
 
-    public int getKodePos() {
+    public String getKodePos() {
         return kodePos;
     }
 
-    public void setKodePos(int kodePos) {
+    public void setKodePos(String kodePos) {
         this.kodePos = kodePos;
     }
-    
+
+    public AlamatEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        if (status == 0) {
+            this.status = AlamatEnum.PERMANENT;
+        } else {
+            this.status = AlamatEnum.TEMPORARY;
+        }
+    }
+
 }

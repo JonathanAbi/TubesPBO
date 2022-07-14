@@ -1,13 +1,18 @@
 package Model;
 
-public abstract class Person extends Thing {
+public abstract class User {
 
+    protected int id;
     protected String name;
     protected String username;
     protected String password;
 
-    public Person(String name, String username, String password, int id) {
-        super(id);
+    public User() {
+
+    }
+
+    public User(String name, String username, String password, int id) {
+        this.id = id;
         this.name = name;
         this.username = username;
         this.password = password;
@@ -36,5 +41,13 @@ public abstract class Person extends Thing {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 }

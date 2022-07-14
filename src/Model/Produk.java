@@ -1,22 +1,32 @@
 
 package Model;
 
-public class Produk extends Thing{
+public class Produk{
+    private int id;
     private String nama;
-    private String berat;
+    private Double berat;
     private String warna;
     private int[] stock;
     private Double harga;
 
-    public Produk(String nama, String berat, String warna, int[] stock, Double harga, int id) {
-        super(id);
+    
+    public Produk(String nama, Double berat, String warna, int[] stock, Double harga, int id) {
+        this.id = id;
         this.nama = nama;
         this.berat = berat;
         this.warna = warna;
         this.stock = stock;
         this.harga = harga;
     }
+    
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getNama() {
         return nama;
     }
@@ -25,11 +35,11 @@ public class Produk extends Thing{
         this.nama = nama;
     }
 
-    public String getBerat() {
+    public Double getBerat() {
         return berat;
     }
 
-    public void setBerat(String berat) {
+    public void setBerat(Double berat) {
         this.berat = berat;
     }
 

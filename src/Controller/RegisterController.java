@@ -4,50 +4,69 @@ import Database.DatabaseHandler;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import java.sql.Statement;
 
 public class RegisterController {
 
-    public void register(String nama, String userName, String pass, String telepon, String alamat, String kelurahan, String kecamatan, String kota, String provinsi, String kodePos) {
-        DatabaseHandler conn = new DatabaseHandler();
-        conn.connect();
-        String query = "INSERT INTO customers(nama,username,pass,telepon,alamat,kelurahan,kecamatan,kota,provinsi,kode_post) VALUES(?,?,?,?,?,?,?,?,?,?)";
+    public String register(String nama, String userName, String pass, String telepon, String alamat, String kelurahan, String kecamatan, String kota, String provinsi, String kodePos) {
+
+        String query;
+        //for hashing the password
+        pass = Hasher.password(pass);
         try {
-            MessageDigest m = MessageDigest.getInstance("MD5");
-            m.update(pass.getBytes());
-            byte[] bytes = m.digest();
-            StringBuilder s = new StringBuilder();
-            for (int i = 0; i < bytes.length; i++) {
-                s.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-            }
-            pass = s.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        try {
-            PreparedStatement stmt = conn.con.prepareStatement(query);
+            DatabaseHandler conn = new DatabaseHandler();
+            conn.connect();
+            PreparedStatement stmt;
+            //for insert customer data
+            query = "INSERT INTO customers(nama,username,pass,telepon) VALUES(?,?,?,?)";
+            stmt = conn.con.prepareStatement(query);
             stmt.setString(1, nama);
             stmt.setString(2, userName);
             stmt.setString(3, pass);
             stmt.setString(4, telepon);
-            stmt.setString(5, alamat);
-            stmt.setString(6, kelurahan);
-            stmt.setString(7, kecamatan);
-            stmt.setString(8, kota);
-            stmt.setString(9, provinsi);
-            stmt.setString(10, kodePos);
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Berhasil melakukan registrasi");
-            
+
+            //for insert alamat data
+            query = "INSERT INTO alamat(alamat_status, alamat, kelurahan, kecamatan, kota, provinsi, kode_post) VALUE (0,?,?,?,?,?,?)";
+            stmt = conn.con.prepareStatement(query);
+            stmt.setString(1, alamat);
+            stmt.setString(2, kelurahan);
+            stmt.setString(3, kecamatan);
+            stmt.setString(4, kota);
+            stmt.setString(5, provinsi);
+            stmt.setString(6, kodePos);
+            stmt.executeUpdate();
+
+            Statement stat = conn.con.createStatement();
+            ResultSet result;
+            //for insert alamat_id to cutomers
+            query = "SELECT * FROM alamat WHERE alamat = '" + alamat + "' AND kelurahan = '" + kelurahan + "' AND kecamatan = '" + kecamatan + "' AND kota = '" + kota + "' AND provinsi = '" + provinsi + "' AND kode_post = '" + kodePos + "'";
+            result = stat.executeQuery(query);
+            result.next();
+            int alamatID = result.getInt(1);
+            query = "UPDATE customers SET alamat_id =" + alamatID + " WHERE username = '" + userName + "'";
+            stat.executeUpdate(query);
+
+            //for insert user_id to alamat
+            query = "SELECT customer_id FROM customers WHERE username = '" + userName + "'";
+            result = stat.executeQuery(query);
+            result.next();
+            int customerID = result.getInt(1);
+            query = "UPDATE alamat SET customer_id = '" + customerID + "' WHERE alamat = '" + alamat + "' AND kelurahan = '" + kelurahan + "' AND kecamatan = '" + kecamatan + "' AND kota = '" + kota + "' AND provinsi = '" + provinsi + "' AND kode_post = '" + kodePos + "'";
+            stat.executeUpdate(query);
+            return "Berhasil melakukan registrasi";
+
         } catch (SQLException e) {
             if (e.getMessage().contains("'username'")) {
-                JOptionPane.showMessageDialog(null, "Username sudah digunakan");
+                return "Username sudah digunakan";
             } else if (e.getMessage().contains("'telepon'")) {
-                JOptionPane.showMessageDialog(null, "Telepon sudah digunakan");
+                return "Telepon sudah digunakan";
             } else {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Error fatal pusing!");
+                return "Error fatal ini mah!";
             }
         }
     }

@@ -1,36 +1,61 @@
 
 package Model;
 
-public class Pesanan extends Thing{
+public class Pesanan{
+    private int id;
     private int paketId;
     private int customerId;
     private int kurirId;
     private int barangId;
+    private int alamatId;
     private int jumlah;
     private UkuranEnum ukuran;
     private String warna;
-    private Double hargaTotal;
+    private Double hargaSatuan;
     private Double biayaPengiriman;
     private PembayaranEnum jenisPembayaran;
     private boolean statusPembayaran;
     private PengirimanEnum statusPengiriman;
 
-    public Pesanan(int paketId, int customerId, int kurirId, int barangId, int jumlah, UkuranEnum ukuran, String warna, Double hargaTotal, Double biayaPengiriman, PembayaranEnum jenisPembayaran, boolean statusPembayaran, PengirimanEnum statusPengiriman, int id) {
-        super(id);
+    public Pesanan(int id, int paketId, int customerId, int kurirId, int barangId, int alamatId, int jumlah, UkuranEnum ukuran, String warna, Double hargaSatuan, Double biayaPengiriman, PembayaranEnum jenisPembayaran, boolean statusPembayaran, PengirimanEnum statusPengiriman) {
+        this.id = id;
         this.paketId = paketId;
         this.customerId = customerId;
         this.kurirId = kurirId;
         this.barangId = barangId;
+        this.alamatId = alamatId;
         this.jumlah = jumlah;
         this.ukuran = ukuran;
         this.warna = warna;
-        this.hargaTotal = hargaTotal;
+        this.hargaSatuan = hargaSatuan;
         this.biayaPengiriman = biayaPengiriman;
         this.jenisPembayaran = jenisPembayaran;
         this.statusPembayaran = statusPembayaran;
         this.statusPengiriman = statusPengiriman;
     }
 
+    
+
+    public Pesanan(int id, int barangID,int jumlah, UkuranEnum ukuran, String warna, Double hargaTotal, Double biayaPengiriman, PembayaranEnum jenisPembayaran) {
+        this.id = id;
+        this.jumlah = jumlah;
+        this.ukuran = ukuran;
+        this.warna = warna;
+        this.hargaSatuan = hargaTotal;
+        this.biayaPengiriman = biayaPengiriman;
+        this.jenisPembayaran = jenisPembayaran;
+        this.barangId = barangID;
+    }
+    
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public int getPaketId() {
         return paketId;
     }
@@ -87,12 +112,12 @@ public class Pesanan extends Thing{
         this.warna = warna;
     }
 
-    public Double getHargaTotal() {
-        return hargaTotal;
+    public Double getHargaSatuan() {
+        return hargaSatuan;
     }
 
-    public void setHargaTotal(Double hargaTotal) {
-        this.hargaTotal = hargaTotal;
+    public void setHargaSatuan(Double hargaSatuan) {
+        this.hargaSatuan = hargaSatuan;
     }
 
     public Double getBiayaPengiriman() {
@@ -125,6 +150,18 @@ public class Pesanan extends Thing{
 
     public void setStatusPengiriman(PengirimanEnum statusPengiriman) {
         this.statusPengiriman = statusPengiriman;
+    }
+
+    public void setAlamatId(int alamatId) {
+        this.alamatId = alamatId;
+    }
+
+    public int getAlamatId() {
+        return alamatId;
+    }
+    
+    public double getHargaTotal() {
+        return this.hargaSatuan*this.jumlah;
     }
     
 }
