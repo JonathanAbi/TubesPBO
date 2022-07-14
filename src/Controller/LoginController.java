@@ -38,6 +38,21 @@ public class LoginController {
                         }
                         Customer customer = new Customer(listAlamat, telepon, nama, username, tempPass, id);
                         SingletonProfile.getInstance().setUser(customer);
+                    } else if (tipe.equals("admin")) {
+                        String nama = result.getString("nama");
+                        String username = result.getString("username");
+                        int id = result.getInt("admin_id");
+                        Admin admin = new Admin(nama, username, tempPass, id);
+                        SingletonProfile.getInstance().setUser(admin);
+                    } else if (tipe.equals("kurir")) {
+                        String nama = result.getString("nama");
+                        String username = result.getString("username");
+                        int id = result.getInt("kurir_id");
+                        String telepon = result.getString("telepon");
+                        Double kapasitas = result.getDouble("kapasitas_berat_barang");
+                        Double totalBerat = result.getDouble("total_berat_barang");
+                        Kurir kurir = new Kurir(kapasitas, totalBerat, telepon, nama, username, tempPass, id);
+                        SingletonProfile.getInstance().setUser(kurir);
                     }
                     return "Login Berhasil!";
                 } else {
