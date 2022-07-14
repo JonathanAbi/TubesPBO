@@ -77,7 +77,6 @@ public class EtalaseController {
         //panel judul
         JPanel panelJudul = new JPanel();
         panelJudul.setPreferredSize(new Dimension(600, 100));
-        panelJudul.setBackground(Color.PINK);
         panelJudul.setLayout(null);
 
         //label judul

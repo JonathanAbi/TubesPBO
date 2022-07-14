@@ -43,7 +43,7 @@ public class RiwayatPembelian {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
-                new Etalase();
+                new Profile();
             }
         });
 

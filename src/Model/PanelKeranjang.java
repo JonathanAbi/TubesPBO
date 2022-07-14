@@ -60,7 +60,6 @@ public class PanelKeranjang extends JPanel {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setSize(500, 150);
-        panel.setBackground(Color.PINK);
         panel.add(nama);
         panel.add(deskripsi);
         panel.add(harga);
