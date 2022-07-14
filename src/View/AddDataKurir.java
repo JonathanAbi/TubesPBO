@@ -137,10 +137,7 @@ public class AddDataKurir {
             @Override
             public void actionPerformed(ActionEvent ae
             ) {
-                if (Integer.parseInt(kapasitasBarang.getText()) < Integer.parseInt(totalKapasitas.getText())) {
-                    JOptionPane.showMessageDialog(null, "Barang sudah melebihi kapasitas. Akan berbahaya bagi anda");
-                    totalKapasitas.setText("");
-                } else if (id.getText().isEmpty() || nama.getText().isEmpty() || telepon.getText().isEmpty() || kapasitasBarang.getText().isEmpty()
+                if (id.getText().isEmpty() || nama.getText().isEmpty() || telepon.getText().isEmpty() || kapasitasBarang.getText().isEmpty()
                         || totalKapasitas.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Semua kolom wajib diisi!");
                 } else {
@@ -171,7 +168,10 @@ public class AddDataKurir {
             @Override
             public void actionPerformed(ActionEvent ae
             ) {
-                if (id.getText().isEmpty() || nama.getText().isEmpty() || telepon.getText().isEmpty() || kapasitasBarang.getText().isEmpty()
+                if (Integer.parseInt(kapasitasBarang.getText()) < Integer.parseInt(totalKapasitas.getText())) {
+                    JOptionPane.showMessageDialog(null, "Barang sudah melebihi kapasitas. Akan berbahaya bagi anda");
+                    totalKapasitas.setText("");
+                } else if (id.getText().isEmpty() || nama.getText().isEmpty() || telepon.getText().isEmpty() || kapasitasBarang.getText().isEmpty()
                         || totalKapasitas.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Semua kolom wajib diisi!");
                 } else {
