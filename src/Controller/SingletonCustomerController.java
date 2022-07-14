@@ -48,10 +48,9 @@ public class SingletonCustomerController {
     ArrayList<Alamat> getAlamatList(int customerId) {
         ArrayList<Alamat> listAlamat = new ArrayList<>();
         DatabaseHandler c = new DatabaseHandler();
-        
+
         try {
             c.connect();
-            
             String query = "SELECT * FROM alamat WHERE customer_id = ?";
             PreparedStatement stmt = c.con.prepareStatement(query);
             stmt.setInt(1, customerId);
@@ -63,14 +62,13 @@ public class SingletonCustomerController {
                 String kecamatan = result.getString("kecamatan");
                 String kota = result.getString("kota");
                 String provinsi = result.getString("provinsi");
-                String kodePos = result.getString("kodePos");
+                String kodePos = result.getString("kode_post");
                 int alamatStatus = result.getInt("alamat_status");
                 Alamat alamat = new Alamat(id, alamatLengkap, kelurahan, kecamatan, kota, provinsi, kodePos, alamatStatus);
                 listAlamat.add(alamat);
             }
             c.disconnect();
         } catch (Exception e) {
-            c.disconnect();
         }
         return listAlamat;
     }
