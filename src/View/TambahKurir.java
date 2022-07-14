@@ -138,6 +138,7 @@ public class TambahKurir extends JFrame implements ActionListener, KeyListener, 
                 String telepon = teleponTf.getText();
                 double kapasitas = Double.parseDouble(kapasitasBarangTf.getText());
                 JOptionPane.showMessageDialog(null, kurir.addKurir(nama, username, password, telepon, kapasitas));
+                new MenuAdmin();
             }
         }
     }
@@ -171,7 +172,7 @@ public class TambahKurir extends JFrame implements ActionListener, KeyListener, 
             Integer.parseInt(tf.getText());
         } catch (NumberFormatException ea) {
             tf.setText("");
-            JOptionPane.showMessageDialog(null, "input harus berupa angkat");
+            JOptionPane.showMessageDialog(null, "input harus berupa angka");
         }
     }
 
