@@ -38,7 +38,7 @@ public class MenuAdmin extends JFrame implements ActionListener, MouseListener{
         int btHeight = 50;
         
         Font titleF = new Font("Sans Serif", Font.BOLD, 35);
-        Font regularF = new Font("Sans Serif", Font.PLAIN, 30);
+        Font regularF = new Font("Sans Serif", Font.PLAIN, 25);
         
         JLabel title = new JLabel("Menu Admin");
         title.setBounds(43, 0, 400, 40);

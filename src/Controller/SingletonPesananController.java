@@ -13,6 +13,7 @@ import Model.SingletonPesanan;
 import Model.UkuranEnum;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,7 +32,6 @@ public class SingletonPesananController {
             ResultSet result = stmt.executeQuery();
             while(result.next()) {
                 int id = result.getInt("pesanan_id");
-                int paketId = result.getInt("paket_id");
                 int customerId = result.getInt("customer_id");
                 int kurirId = result.getInt("kurir_id");
                 int alamatId = result.getInt("alamat_id");
@@ -44,7 +44,7 @@ public class SingletonPesananController {
                 PembayaranEnum jenisPembayaran = PembayaranEnum.values()[result.getInt("jenis_pembayaran")];
                 boolean statusPembayaran = result.getBoolean("status_pembayaran");
                 PengirimanEnum statusPengiriman = PengirimanEnum.values()[result.getInt("status_pengiriman")];
-                Pesanan pesanan = new Pesanan(id, paketId, customerId, kurirId, barangId, alamatId, jumlah, ukuran, warna, hargaSatuan, biayaPengiriman, jenisPembayaran, statusPembayaran, statusPengiriman);
+                Pesanan pesanan = new Pesanan(id, customerId, kurirId, barangId, alamatId, jumlah, ukuran, warna, hargaSatuan, biayaPengiriman, jenisPembayaran, statusPembayaran, statusPengiriman);
                 pesananS.addPesanan(pesanan);
             }
             
