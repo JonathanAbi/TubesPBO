@@ -44,7 +44,6 @@ public class StatusPembelian {
         
         StatusPembelianController c =  new StatusPembelianController();
         ArrayList<Pesanan> listPesanan = c.getPesanan();
-        System.out.println(listPesanan.size());
         
         //JLabel 1
         JLabel lbl1 = new JLabel("Dalam Pengemasan");
@@ -101,15 +100,12 @@ public class StatusPembelian {
             gbc.gridwidth = GridBagConstraints.REMAINDER;
             gbc.weightx = 1;
             gbc.fill = GridBagConstraints.HORIZONTAL;
-            System.out.println(listPesanan.get(i).getStatusPengiriman());
             if(listPesanan.get(i).getStatusPengiriman() == PengirimanEnum.PENGEMASAN){
                 panelList1.add(panel, gbc, 0);
             }else if(listPesanan.get(i).getStatusPengiriman() == PengirimanEnum.MENUNGGU_KURIR){
                 panelList2.add(panel, gbc, 0);
             }else if(listPesanan.get(i).getStatusPengiriman() == PengirimanEnum.DIANTAR){
                 panelList3.add(panel, gbc, 0);
-            }else{
-                System.out.println("ga masuk mana mana");
             }
         }
         frame.add(back);

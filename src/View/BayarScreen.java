@@ -96,7 +96,7 @@ public class BayarScreen {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 new TambahAlamat(listProduk, listUkuran,listJumlah);
-                
+                frame.dispose();
             }
             
         });

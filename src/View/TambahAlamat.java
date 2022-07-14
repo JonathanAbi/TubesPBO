@@ -105,6 +105,7 @@ public class TambahAlamat {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 frame.dispose();
+                new BayarScreen(listProduk,listUkuran,listJumlah);
             }
             
         });
