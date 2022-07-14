@@ -34,7 +34,7 @@ public class SingletonPesanan {
         return listPesanan.get(index);
     }
     
-    public void addProduk(Pesanan p){
+    public void addPesanan(Pesanan p){
         this.listPesanan.add(p);
     }
 }
