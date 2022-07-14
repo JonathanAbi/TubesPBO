@@ -27,7 +27,6 @@ public class UpdateHargaController {
     }
 
     public String[] getNameList() {
-        produkCt.addProdukToSingleton();
         String[] nameList = new String[getProdukList().size()];
         ArrayList<Produk> produkList = getProdukList();
         for (int i = 0; i < nameList.length; i++) {
