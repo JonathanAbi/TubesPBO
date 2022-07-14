@@ -6,7 +6,6 @@
 package View;
 
 import Controller.ControllerKurir;
-import Controller.SingletonKurir;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;

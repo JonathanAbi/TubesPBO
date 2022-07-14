@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 public class ControllerKurir {
 
     static DatabaseHandler conn = new DatabaseHandler();
-    static Kurir kurir = new Kurir();
+    static Kurir kurir;
 
     public static void addKurir(String nama, String username, String pass, String telepon, String kapasitas, String totalBerat) {
         conn.connect();

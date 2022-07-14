@@ -20,7 +20,6 @@ import javax.swing.JScrollPane;
 public class StatusPembelian {
     
     public StatusPembelian(){
-        System.out.println("hehew");
         //font
         Font fontButton = new Font("Serif", Font.PLAIN, 14);
         
@@ -97,7 +96,6 @@ public class StatusPembelian {
         mainPanel3.add(new JScrollPane(panelList3));
         
         for (int i = 0; i < listPesanan.size(); i++) {
-            System.out.println("masuk loop");
             JPanel panel = new PanelRiwayat(listPesanan.get(i));
             gbc = new GridBagConstraints();
             gbc.gridwidth = GridBagConstraints.REMAINDER;
@@ -106,13 +104,10 @@ public class StatusPembelian {
             System.out.println(listPesanan.get(i).getStatusPengiriman());
             if(listPesanan.get(i).getStatusPengiriman() == PengirimanEnum.PENGEMASAN){
                 panelList1.add(panel, gbc, 0);
-                System.out.println("pengemasan");
             }else if(listPesanan.get(i).getStatusPengiriman() == PengirimanEnum.MENUNGGU_KURIR){
                 panelList2.add(panel, gbc, 0);
-                System.out.println("menunggu kurir");
             }else if(listPesanan.get(i).getStatusPengiriman() == PengirimanEnum.DIANTAR){
                 panelList3.add(panel, gbc, 0);
-                System.out.println("Diantar");
             }else{
                 System.out.println("ga masuk mana mana");
             }

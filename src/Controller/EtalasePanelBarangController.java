@@ -7,7 +7,10 @@ import java.sql.SQLException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.sql.PreparedStatement;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.JSpinner.DefaultEditor;
 
