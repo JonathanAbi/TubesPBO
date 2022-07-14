@@ -44,10 +44,8 @@ public class LogOutController {
                 EtalasePanelBarangController c = new EtalasePanelBarangController();
                 c.getProduk();
             }
-            JOptionPane.showMessageDialog(null, "Berhasil menghapus barang dari keranjang");
         }
         catch (SQLException e){
-            JOptionPane.showMessageDialog(null, "Error menghapus barang dari keranjang");
         }
         conn.disconnect();
     }

@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import View.*;
-import View.KeranjangScreen;
 
 public class EtalaseController {
 
