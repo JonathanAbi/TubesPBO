@@ -48,7 +48,7 @@ public class PanelRiwayat extends JPanel {
             JLabel biayaPengiriman = new JLabel("Biaya Pengiriman : " + riwayatPembelian.getBiayaPengiriman());
             biayaPengiriman.setFont(fontNamaProduk);
             //jenis pembayaran
-            JLabel jenisPembayaran = new JLabel("Biaya Pengiriman : " + riwayatPembelian.getJenisPembayaran());
+            JLabel jenisPembayaran = new JLabel("Metode Pembayaran : " + riwayatPembelian.getJenisPembayaran());
             jenisPembayaran.setFont(fontNamaProduk);
 
             JPanel pNama = new JPanel();

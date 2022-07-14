@@ -1,14 +1,10 @@
 package View;
 
-import Controller.EtalasePanelBarangController;
-import Controller.RiwayatPembelianController;
+import Controller.StatusPembelianController;
 import Model.PanelRiwayat;
 import Model.PengirimanEnum;
 import Model.Pesanan;
-import Model.SingletonKeranjang;
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -24,12 +20,14 @@ import javax.swing.JScrollPane;
 public class StatusPembelian {
     
     public StatusPembelian(){
+        System.out.println("hehew");
         //font
         Font fontButton = new Font("Serif", Font.PLAIN, 14);
         
         //frame
         JFrame frame = new JFrame("Status Pembelian");
         frame.setSize(600, 700);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
         frame.setLocationRelativeTo(null);
         
@@ -45,27 +43,29 @@ public class StatusPembelian {
             }
         });
         
-        ArrayList<Pesanan> listPesanan = new ArrayList<>();
+        StatusPembelianController c =  new StatusPembelianController();
+        ArrayList<Pesanan> listPesanan = c.getPesanan();
+        System.out.println(listPesanan.size());
         
         //JLabel 1
         JLabel lbl1 = new JLabel("Dalam Pengemasan");
-        lbl1.setBounds(5,35,400,20);
+        lbl1.setBounds(5,55,400,20);
         lbl1.setFont(new Font("Serif",Font.PLAIN,16));
         
-        //JLabel 1
+        //JLabel 2
         JLabel lbl2 = new JLabel("Menunggu Kurir");
-        lbl2.setBounds(5,235,400,20);
+        lbl2.setBounds(5,255,400,20);
         lbl2.setFont(new Font("Serif",Font.PLAIN,16));
         
-        //JLabel 1
+        //JLabel 3
         JLabel lbl3 = new JLabel("Sedang Diantar");
-        lbl3.setBounds(5,435,400,20);
+        lbl3.setBounds(5,455,400,20);
         lbl3.setFont(new Font("Serif",Font.PLAIN,16));
         
         //Main Panel
         JPanel mainPanel1 = new JPanel();
         mainPanel1.setLayout(new BorderLayout());
-        mainPanel1.setBounds(5, 55, 575, 175);
+        mainPanel1.setBounds(5, 75, 575, 175);
 
         //panel list
         JPanel panelList1 = new JPanel(new GridBagLayout());
@@ -79,7 +79,7 @@ public class StatusPembelian {
         //Main Panel
         JPanel mainPanel2 = new JPanel();
         mainPanel2.setLayout(new BorderLayout());
-        mainPanel2.setBounds(5, 255, 575, 175);
+        mainPanel2.setBounds(5, 275, 575, 175);
 
         //panel list
         JPanel panelList2 = new JPanel(new GridBagLayout());
@@ -89,7 +89,7 @@ public class StatusPembelian {
         //Main Panel
         JPanel mainPanel3 = new JPanel();
         mainPanel3.setLayout(new BorderLayout());
-        mainPanel3.setBounds(5, 455, 575, 175);
+        mainPanel3.setBounds(5, 475, 575, 175);
 
         //panel list
         JPanel panelList3 = new JPanel(new GridBagLayout());
@@ -97,19 +97,24 @@ public class StatusPembelian {
         mainPanel3.add(new JScrollPane(panelList3));
         
         for (int i = 0; i < listPesanan.size(); i++) {
+            System.out.println("masuk loop");
             JPanel panel = new PanelRiwayat(listPesanan.get(i));
             gbc = new GridBagConstraints();
             gbc.gridwidth = GridBagConstraints.REMAINDER;
             gbc.weightx = 1;
             gbc.fill = GridBagConstraints.HORIZONTAL;
+            System.out.println(listPesanan.get(i).getStatusPengiriman());
             if(listPesanan.get(i).getStatusPengiriman() == PengirimanEnum.PENGEMASAN){
                 panelList1.add(panel, gbc, 0);
-            }
-            if(listPesanan.get(i).getStatusPengiriman() == PengirimanEnum.MENUNGGU_KURIR){
+                System.out.println("pengemasan");
+            }else if(listPesanan.get(i).getStatusPengiriman() == PengirimanEnum.MENUNGGU_KURIR){
                 panelList2.add(panel, gbc, 0);
-            }
-            if(listPesanan.get(i).getStatusPengiriman() == PengirimanEnum.DIANTAR){
+                System.out.println("menunggu kurir");
+            }else if(listPesanan.get(i).getStatusPengiriman() == PengirimanEnum.DIANTAR){
                 panelList3.add(panel, gbc, 0);
+                System.out.println("Diantar");
+            }else{
+                System.out.println("ga masuk mana mana");
             }
         }
         frame.add(back);
@@ -118,7 +123,7 @@ public class StatusPembelian {
         frame.add(lbl3);
         frame.add(mainPanel1);
         frame.add(mainPanel2);
-        frame.add(mainPanel2);
+        frame.add(mainPanel3);
         frame.setVisible(true);
     }
 }

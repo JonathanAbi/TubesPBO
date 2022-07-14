@@ -11,7 +11,7 @@ public class Pesanan{
     private int jumlah;
     private UkuranEnum ukuran;
     private String warna;
-    private Double hargaSatuan;
+    private Double hargaTotal;
     private Double biayaPengiriman;
     private PembayaranEnum jenisPembayaran;
     private boolean statusPembayaran;
@@ -27,7 +27,7 @@ public class Pesanan{
         this.jumlah = jumlah;
         this.ukuran = ukuran;
         this.warna = warna;
-        this.hargaSatuan = hargaSatuan;
+        this.hargaTotal = hargaSatuan;
         this.biayaPengiriman = biayaPengiriman;
         this.jenisPembayaran = jenisPembayaran;
         this.statusPembayaran = statusPembayaran;
@@ -36,15 +36,16 @@ public class Pesanan{
 
     
 
-    public Pesanan(int id, int barangID,int jumlah, UkuranEnum ukuran, String warna, Double hargaTotal, Double biayaPengiriman, PembayaranEnum jenisPembayaran) {
+    public Pesanan(int id, int barangID,int jumlah, UkuranEnum ukuran, String warna, Double hargaTotal, Double biayaPengiriman, PembayaranEnum jenisPembayaran, PengirimanEnum statusPengiriman) {
         this.id = id;
         this.jumlah = jumlah;
         this.ukuran = ukuran;
         this.warna = warna;
-        this.hargaSatuan = hargaTotal;
+        this.hargaTotal = hargaTotal;
         this.biayaPengiriman = biayaPengiriman;
         this.jenisPembayaran = jenisPembayaran;
         this.barangId = barangID;
+        this.statusPengiriman = statusPengiriman;
     }
     
     
@@ -112,12 +113,12 @@ public class Pesanan{
         this.warna = warna;
     }
 
-    public Double getHargaSatuan() {
-        return hargaSatuan;
+    public Double getHargaTotal() {
+        return hargaTotal;
     }
 
-    public void setHargaSatuan(Double hargaSatuan) {
-        this.hargaSatuan = hargaSatuan;
+    public void setHargaTotal(Double hargaTotal) {
+        this.hargaTotal = hargaTotal;
     }
 
     public Double getBiayaPengiriman() {
@@ -159,9 +160,4 @@ public class Pesanan{
     public int getAlamatId() {
         return alamatId;
     }
-    
-    public double getHargaTotal() {
-        return this.hargaSatuan*this.jumlah;
-    }
-    
 }

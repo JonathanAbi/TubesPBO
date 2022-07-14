@@ -3,6 +3,7 @@ package Controller;
 
 import Database.DatabaseHandler;
 import Model.PembayaranEnum;
+import Model.PengirimanEnum;
 import Model.Pesanan;
 import Model.SingletonProfile;
 import Model.UkuranEnum;
@@ -19,7 +20,7 @@ public class RiwayatPembelianController {
             java.sql.Statement stat = conn.con.createStatement();
             ResultSet result = stat.executeQuery("select * from pesanan where customer_id='" + SingletonProfile.getInstance().getUser().getId() + "' and status_pengiriman = 3");
             while(result.next()){
-                Pesanan temp = new Pesanan(result.getInt("pesanan_id"),result.getInt("barang_id"),result.getInt("jumlah"),UkuranEnum.values()[result.getInt("ukuran")],result.getString("warna"),result.getDouble("harga_total"),result.getDouble("biaya_pengiriman"),PembayaranEnum.values()[result.getInt("jenis_pembayaran")]);
+                Pesanan temp = new Pesanan(result.getInt("pesanan_id"),result.getInt("barang_id"),result.getInt("jumlah"),UkuranEnum.values()[result.getInt("ukuran")],result.getString("warna"),result.getDouble("harga_total"),result.getDouble("biaya_pengiriman"),PembayaranEnum.values()[result.getInt("jenis_pembayaran")],PengirimanEnum.values()[result.getInt("status_pengiriman")]);
                 riwayatPembelian.add(temp);
             }
         }catch(SQLException e){
