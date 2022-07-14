@@ -51,7 +51,7 @@ public class UpdateHarga extends JFrame implements ActionListener, KeyListener, 
         frame.setLocationRelativeTo(null);
 
         Font titleF = new Font("Sans Serif", Font.BOLD, 35);
-        JLabel title = new JLabel("Update Stok");
+        JLabel title = new JLabel("Update Harga");
         title.setFont(titleF);
         title.setBounds(0, 0, 450, 37);
         title.setHorizontalAlignment(JLabel.CENTER);

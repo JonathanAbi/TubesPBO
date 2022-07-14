@@ -3,11 +3,9 @@ package Controller;
 import Database.DatabaseHandler;
 import Model.Alamat;
 import Model.Customer;
+import Model.Kurir;
 import Model.SingletonProfile;
 import Model.User;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -42,7 +40,7 @@ public class LoginController {
                         String nama = result.getString("nama");
                         String username = result.getString("username");
                         int id = result.getInt("admin_id");
-                        Admin admin = new Admin(nama, username, tempPass, id);
+                        User admin = new User(nama, username, tempPass, id);
                         SingletonProfile.getInstance().setUser(admin);
                     } else if (tipe.equals("kurir")) {
                         String nama = result.getString("nama");

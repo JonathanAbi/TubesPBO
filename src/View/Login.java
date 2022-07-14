@@ -55,7 +55,13 @@ public class Login {
                     frame.dispose();
                     JOptionPane.showMessageDialog(null,result);
                     //masukin tujuan dibawah
-                    new Etalase();
+                    if (tipeUser.equals("customers")) {
+                        new Etalase();                        
+                    } else if(tipeUser.equals("admin")) {
+                        new MenuAdmin();
+                    } else if(tipeUser.equals("kurir")) {
+                        
+                    }
                 }else if(result.equals("Password Salah!")){
                     JOptionPane.showMessageDialog(null,result);
                     pass.setText("");
