@@ -7,12 +7,12 @@ package Controller;
 
 import Database.DatabaseHandler;
 import Model.Alamat;
-import Model.AlamatEnum;
 import Model.Customer;
 import Model.SingletonCustomer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,33 +21,28 @@ import java.util.ArrayList;
 public class SingletonCustomerController {
     SingletonCustomer customerS = SingletonCustomer.getInstance();
 
-    public void addCustomerToSingleton() {
+    public void addCustomerToDB() {
         customerS.reset();
         DatabaseHandler c = new DatabaseHandler();
-
         try {
             c.connect();
-
-            PreparedStatement stmt;
             String query = "SELECT * FROM customers";
-            stmt = c.con.prepareStatement(query);
+            PreparedStatement stmt = c.con.prepareStatement(query);
             ResultSet result = stmt.executeQuery();
-            while (result.next()) {
-                String name = result.getString("nama");
+            while(result.next()) {
+                int id = result.getInt("customer_id");
+                String nama = result.getString("nama");
                 String username = result.getString("username");
                 String password = result.getString("pass");
-                String alamat = result.getString("alamat");
-                int id = result.getInt("customer_id");
-                ArrayList<Alamat> listAlamat = getAlamatList(id);
                 String telepon = result.getString("telepon");
-                Customer customer = new Customer(listAlamat, telepon, name, username, password, id);
+                ArrayList<Alamat> listAlamat = getAlamatList(id);
+                Customer customer = new Customer(listAlamat, telepon, nama, username, password, id);
                 customerS.addCustomer(customer);
             }
-
+            
             c.disconnect();
         } catch (Exception e) {
         }
-
     }
     
     ArrayList<Alamat> getAlamatList(int customerId) {

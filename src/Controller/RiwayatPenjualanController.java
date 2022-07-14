@@ -12,6 +12,7 @@ import Model.SingletonCustomer;
 import Model.SingletonPesanan;
 import Model.SingletonProduk;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,12 +29,18 @@ public class RiwayatPenjualanController {
     public Customer getCustomer(int customerId) {
         SingletonCustomerController customerCt = new SingletonCustomerController();
         SingletonCustomer customerS = SingletonCustomer.getInstance();
-        customerCt.addCustomerToSingleton();
-        for (Customer customer : customerS.getListCustomer()) {
-            if (customer.getId()==customerId) {
-                return customer;
-            }
-        }
+        customerCt.addCustomerToDB();
+        JOptionPane.showMessageDialog(null, "cuslist length-- "+customerS.getListCustomer().size());
+        
+//        for (int i = 0; i < customerS.getListCustomer().size(); i++) {
+//            Customer customer = customerS.getListCustomer().get(i);
+//        }
+//        for (Customer customer : customerS.getListCustomer()) {
+//            JOptionPane.showMessageDialog(null, "masuk loop");
+//            if (customer.getId()==customerId) {
+//                return customer;
+//            }
+//        }
         return null;
     }
     

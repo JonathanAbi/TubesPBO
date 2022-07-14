@@ -13,6 +13,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -46,19 +47,28 @@ public class RiwayatPenjualan {
         
         String[] column = {"ID Pesanan", "Nama", "Produk", "Ukuran", "Jumlah", "Harga Total", "Status Pengiriman"};
         ArrayList<Pesanan> pesananList = riwayat.getPesananList();
-        String[][] rData = new String[pesananList.size()][column.length];//row and column
+        String[][] rData = new String[pesananList.size()][column.length];
         for (int i = 0; i < rData.length; i++) {
-            System.out.println("masuk");
             Pesanan pesanan = pesananList.get(i);
             rData[i][0] = pesanan.getId()+"";
             Customer customer = riwayat.getCustomer(pesanan.getCustomerId());
+            JOptionPane.showMessageDialog(null, "customerID"+customer.getId());
             rData[i][1] = customer.getName();
+            System.out.println("akhrirnya selesaai");
             Produk produk = riwayat.getProduk(pesanan.getBarangId());
             rData[i][2] = produk.getNama();
             rData[i][3] = pesanan.getUkuran().getString();
             rData[i][4] = pesanan.getJumlah()+"";
             rData[i][5] = pesanan.getHargaTotal()+"";
             rData[i][6] = pesanan.getStatusPengiriman().getString();
+        }
+
+        for (int i = 0; i < rData.length; i++) {
+            Pesanan pesanan = pesananList.get(i);
+            rData[i][0] = pesanan.getId()+"";
+            int cutomerId = pesanan.getCustomerId();
+            Customer customer = riwayat.getCustomer(cutomerId);
+            JOptionPane.showMessageDialog(null, customer.getName());
         }
         table = new JTable(rData, column);
         table.setBounds(40, 0, 450, 450);
