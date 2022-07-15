@@ -39,7 +39,7 @@ public class SingletonPesananController {
                 int jumlah = result.getInt("jumlah");
                 UkuranEnum ukuran = UkuranEnum.values()[result.getInt("ukuran")];
                 String warna = result.getString("warna");
-                double hargaSatuan = result.getDouble("harga_satuan");
+                double hargaSatuan = result.getDouble("harga_total");
                 double biayaPengiriman = result.getDouble("biaya_pengiriman");
                 PembayaranEnum jenisPembayaran = PembayaranEnum.values()[result.getInt("jenis_pembayaran")];
                 boolean statusPembayaran = result.getBoolean("status_pembayaran");
