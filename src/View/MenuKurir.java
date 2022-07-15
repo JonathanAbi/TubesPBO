@@ -1,6 +1,7 @@
 package View;
 
 
+import Controller.LogOutController;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -122,8 +123,8 @@ public class MenuKurir {
             public void actionPerformed(ActionEvent ae
             ) {
 
-                System.exit(0);
-                btnExit.addActionListener(this);
+                frame.dispose();
+                new LogOutController();
             }
         });
     }

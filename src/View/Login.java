@@ -60,7 +60,7 @@ public class Login {
                     } else if(tipeUser.equals("admin")) {
                         new MenuAdmin();
                     } else if(tipeUser.equals("kurir")) {
-                        
+                        new MenuKurir();
                     }
                 }else if(result.equals("Password Salah!")){
                     JOptionPane.showMessageDialog(null,result);
