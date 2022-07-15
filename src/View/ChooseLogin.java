@@ -54,6 +54,7 @@ public class ChooseLogin implements ActionListener{
         buttonBack.setBounds(170, 320, 140, 50);
         buttonBack.setFont(font1);
         buttonBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        buttonBack.addActionListener(this);
 
         frame.add(judul);
         frame.add(buttonAdmin);

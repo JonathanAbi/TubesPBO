@@ -131,6 +131,13 @@ public class Register {
         back.setBounds(100, 510, 180, 50);
         back.setFont(font1);
         back.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        back.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                new ChooseLogin();
+            }
+        });
 
         frame.add(judul);
         frame.add(namaLabel);
