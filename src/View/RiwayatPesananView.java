@@ -50,7 +50,7 @@ public class RiwayatPesananView {
         JScrollPane pane = new JScrollPane(table);
 
         conn.connect();
-        String query = "SELECT kurir.kurir_id, barang.nama, barang.berat, barang.harga, pesanan.warna, pesanan.ukuran, pesanan.harga_total, pesanan.status_pengiriman FROM kurir INNER JOIN pesanan ON kurir.kurir_id = pesanan.kurir_id INNER JOIN barang ON barang.barang_id = pesanan.pesanan_id";
+        String query = "SELECT kurir.kurir_id, barang.nama, barang.berat, barang.harga, pesanan.warna, pesanan.ukuran, pesanan.harga_total, pesanan.status_pengiriman FROM kurir INNER JOIN pesanan ON kurir.kurir_id = pesanan.kurir_id INNER JOIN barang ON barang.barang_id = pesanan.pesanan_id WHERE status_pengiriman='3'";
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
