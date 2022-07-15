@@ -83,6 +83,10 @@ public class ChooseLogin implements ActionListener{
                 frame.dispose();
                 new Login("kurir");
                 break;
+            case "Register":
+                frame.dispose();
+                new Register();
+                break;
             case "Kembali":
                 frame.dispose();
                 new Etalase();

@@ -9,7 +9,7 @@ public class DatabaseHandler {
 
     public Connection con;
     private String driver = "com.mysql.cj.jdbc.Driver";
-    private String url = "jdbc:mysql://localhost/tubes_pbo";
+    private String url = "jdbc:mysql://localhost/tubes_temp";
 //    private String url = "jdbc:mysql://localhost/tubes_pbo?serverTimezone=" + TimeZone.getDefault().getID();
     private String username = "root";
     private String password = "";

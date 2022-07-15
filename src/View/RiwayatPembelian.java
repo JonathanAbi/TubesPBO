@@ -22,8 +22,6 @@ import javax.swing.JScrollPane;
 public class RiwayatPembelian {
 
     public RiwayatPembelian() {
-        EtalasePanelBarangController c = new EtalasePanelBarangController();
-        c.getProduk();
         RiwayatPembelianController controller = new RiwayatPembelianController();
 
         Font fontButton = new Font("Serif", Font.PLAIN, 14);
